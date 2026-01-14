@@ -67,3 +67,19 @@ html {
 .animate-fade-in {
     animation: fadeInUp 0.4s ease-out forwards;
 }
+
+/* Animation for Modals and List */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in {
+    animation: fadeInUp 0.3s ease-out forwards;
+}
