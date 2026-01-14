@@ -10,13 +10,9 @@ function getTodayString() {
     const date = new Date();
     
     // --- TESTING SECTION ---
-    // Uncomment the line below to simulate "Feb 20" (Roza 2).
-    // This will HIDE Feb 19 and show Feb 20 at the top with Green Highlight.
-    
+    // Uncomment the line below to simulate a date (e.g., "Feb 20")
     // return "Feb 20"; 
     
-    // -----------------------
-
     const month = date.toLocaleString('default', { month: 'short' }); // "Jan", "Feb"
     const day = String(date.getDate()).padStart(2, '0'); // "01", "19"
     return `${month} ${day}`;
@@ -85,7 +81,6 @@ function createRowHtml(item, animate = false) {
 
     return `
         <div class="${cardClass} ${animationClass} rounded-xl p-4 transition-all duration-200 flex items-center justify-between mb-3 relative overflow-hidden">
-            
             <div class="flex flex-col w-1/3 border-r border-gray-100 pr-3">
                 <div class="flex items-center">
                     <span class="text-xs font-bold text-gray-400 uppercase">Roza ${item.roza}</span>
@@ -94,27 +89,19 @@ function createRowHtml(item, animate = false) {
                 <span class="text-lg font-bold ${textClass} leading-tight mt-1 whitespace-nowrap">${item.date}</span>
                 <span class="text-xs text-gray-400 font-medium">${item.day}</span>
             </div>
-
             <div class="flex flex-1 justify-around items-center pl-2 gap-2">
-                
                 <div class="text-center flex flex-col items-center">
                     <div class="flex items-center justify-center text-gray-400 mb-1">
                         <span class="text-[10px] uppercase font-semibold text-gray-400 tracking-wide">Sehri</span>
                     </div>
-                    <span class="text-sm font-bold text-gray-800 bg-gray-100/80 px-2 py-1.5 rounded-lg border border-gray-200 whitespace-nowrap min-w-[80px] flex justify-center shadow-sm">
-                        ${item.sehri}
-                    </span>
+                    <span class="text-sm font-bold text-gray-800 bg-gray-100/80 px-2 py-1.5 rounded-lg border border-gray-200 whitespace-nowrap min-w-[80px] flex justify-center shadow-sm">${item.sehri}</span>
                 </div>
-
                 <div class="text-center flex flex-col items-center">
                     <div class="flex items-center justify-center text-gray-400 mb-1">
                         <span class="text-[10px] uppercase font-semibold text-gray-400 tracking-wide">Iftar</span>
                     </div>
-                    <span class="text-sm font-bold text-gray-800 bg-gray-100/80 px-2 py-1.5 rounded-lg border border-gray-200 whitespace-nowrap min-w-[80px] flex justify-center shadow-sm">
-                        ${item.iftar}
-                    </span>
+                    <span class="text-sm font-bold text-gray-800 bg-gray-100/80 px-2 py-1.5 rounded-lg border border-gray-200 whitespace-nowrap min-w-[80px] flex justify-center shadow-sm">${item.iftar}</span>
                 </div>
-
             </div>
         </div>
     `;
@@ -128,43 +115,27 @@ function renderTimetable() {
     
     if (!container) return;
     
-    // 1. Find index of "Today"
     const todayString = getTodayString();
     const todayIndex = fullTimetableData.findIndex(item => item.date === todayString);
-
-    // 2. Filter Logic:
-    // If today matches a date (e.g., Feb 20), start the list from there.
-    // If today is NOT found (e.g., Jan 14), default to index 0 (Show Feb 19).
     const startIndex = (todayIndex !== -1) ? todayIndex : 0;
-
-    // 3. Create the "Effective Data" array (Past days removed)
     const effectiveData = fullTimetableData.slice(startIndex);
 
     container.innerHTML = ''; 
 
-    // 4. Render based on View Mode (Collapsed vs Full)
     if (!isFullView) {
-        // Show Top 5 of the remaining days
         const viewData = effectiveData.slice(0, INITIAL_COUNT);
         viewData.forEach(item => {
             container.innerHTML += createRowHtml(item, false);
         });
-        
-        // Update Button
         if (btnText) btnText.innerText = "View Complete Timetable";
         if (btnIcon) btnIcon.style.transform = "rotate(0deg)";
-        
-        // Hide button if we are at end of Ramadan (less than 5 days left)
         const btn = document.getElementById('view-all-btn');
         if (btn) btn.style.display = effectiveData.length <= INITIAL_COUNT ? 'none' : 'flex';
 
     } else {
-        // Show EVERYTHING remaining
         effectiveData.forEach(item => {
             container.innerHTML += createRowHtml(item, true);
         });
-        
-        // Update Button
         if (btnText) btnText.innerText = "Show Less";
         if (btnIcon) btnIcon.style.transform = "rotate(180deg)";
     }
@@ -210,6 +181,199 @@ function startCountdown() {
     }, 1000);
 }
 
+// --- Function: Share App ---
+function shareApp() {
+    const shareData = {
+        title: 'Ramadan Timetable 2026',
+        text: 'Check out the Digital Ramadan Timetable for Mumbai 2026!',
+        url: window.location.href
+    };
+    if (navigator.share) {
+        navigator.share(shareData).catch((err) => console.log('Error sharing:', err));
+    } else {
+        navigator.clipboard.writeText(window.location.href);
+        alert('Link copied to clipboard!');
+    }
+}
+
+// ================= DUA OF THE DAY SLIDESHOW LOGIC =================
+
+const duaData = [
+    {
+        arabic: "اللَّهُمَّ إِنَّكَ عَفُوٌّ تُحِبُّ الْعَفْوَ فَاعْفُ عَنِّي",
+        transliteration: "Allahumma innaka 'afuwwun tuhibbul-'afwa fa'fu 'anni",
+        translation: "O Allah, You are Forgiving and love forgiveness, so forgive me.",
+        reference: "(Tirmidhi)"
+    },
+    {
+        arabic: "رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ",
+        transliteration: "Rabbana atina fid-dunya hasanatan wa fil 'akhirati hasanatan waqina 'adhaban-nar",
+        translation: "Our Lord! Give us in this world that which is good and in the Hereafter that which is good, and save us from the torment of the Fire!",
+        reference: "(Qur'an 2:201)"
+    },
+    {
+        arabic: "یَا مُقَلِّبَ الْقُلُوبِ ثَبِّتْ قَلْبِی عَلٰی دِینِكَ",
+        transliteration: "Ya Muqallibal-qulubi thabbit qalbi 'ala dinika",
+        translation: "O Controller of the hearts, make my heart steadfast in Your religion.",
+        reference: "(Tirmidhi)"
+    }
+];
+
+let currentDuaIndex = 0;
+const duaIntervalTime = 5000; // 5 seconds
+let duaSlideInterval;
+
+function initDuaSlideshow() {
+    const slidesContainer = document.getElementById('dua-slides-container');
+    const indicatorsContainer = document.getElementById('dua-indicators');
+    
+    if (!slidesContainer || !indicatorsContainer) return;
+
+    // 1. Generate Slides and Indicators HTML
+    duaData.forEach((dua, index) => {
+        // Slide HTML
+        const slideHtml = `
+            <div class="w-full flex-shrink-0 px-4">
+                <div class="text-center flex flex-col justify-center h-full">
+                    <p class="arabic-text text-2xl mb-3 font-arabic leading-loose">
+                        ${dua.arabic}
+                    </p>
+                    <p class="text-gray-600 text-sm italic mb-2">
+                        (${dua.transliteration})
+                    </p>
+                    <p class="text-gray-800 text-sm font-medium">
+                        "${dua.translation}"
+                    </p>
+                    <p class="text-xs text-gray-400 mt-3">${dua.reference}</p>
+                </div>
+            </div>
+        `;
+        slidesContainer.innerHTML += slideHtml;
+
+        // Indicator HTML
+        const indicator = document.createElement('button');
+        indicator.classList.add('w-2', 'h-2', 'rounded-full', 'transition-colors', 'duration-300', 'bg-gray-300');
+        if (index === 0) indicator.classList.add('bg-brand-600');
+        
+        indicator.addEventListener('click', () => {
+            goToDuaSlide(index);
+            resetDuaInterval(); 
+        });
+        indicatorsContainer.appendChild(indicator);
+    });
+
+    // 2. Add Event Listeners for Prev/Next buttons
+    document.getElementById('prev-dua').addEventListener('click', () => {
+        prevDuaSlide();
+        resetDuaInterval();
+    });
+    document.getElementById('next-dua').addEventListener('click', () => {
+        nextDuaSlide();
+        resetDuaInterval();
+    });
+
+    // 3. Start Auto-play
+    startDuaSlideshow();
+}
+
+function updateDuaCarousel() {
+    const slidesContainer = document.getElementById('dua-slides-container');
+    const indicators = document.querySelectorAll('#dua-indicators button');
+    
+    // Move the container
+    slidesContainer.style.transform = `translateX(-${currentDuaIndex * 100}%)`;
+
+    // Update indicators
+    indicators.forEach((indicator, index) => {
+        if (index === currentDuaIndex) {
+            indicator.classList.remove('bg-gray-300');
+            indicator.classList.add('bg-brand-600');
+        } else {
+            indicator.classList.remove('bg-brand-600');
+            indicator.classList.add('bg-gray-300');
+        }
+    });
+}
+
+function nextDuaSlide() {
+    currentDuaIndex = (currentDuaIndex + 1) % duaData.length;
+    updateDuaCarousel();
+}
+
+function prevDuaSlide() {
+    currentDuaIndex = (currentDuaIndex - 1 + duaData.length) % duaData.length;
+    updateDuaCarousel();
+}
+
+function goToDuaSlide(index) {
+    currentDuaIndex = index;
+    updateDuaCarousel();
+}
+
+function startDuaSlideshow() {
+    duaSlideInterval = setInterval(nextDuaSlide, duaIntervalTime);
+}
+
+function resetDuaInterval() {
+    clearInterval(duaSlideInterval);
+    startDuaSlideshow();
+}
+
+// ================= END DUA SLIDESHOW LOGIC =================
+
+// --- NAVIGATION & MODAL LOGIC ---
+function navAction(action) {
+    const btns = document.querySelectorAll('.nav-btn');
+    btns.forEach(btn => {
+        btn.classList.remove('text-brand-600');
+        btn.classList.add('text-gray-400');
+    });
+
+    if (action === 'home') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        highlightNav(0);
+    } else if (action === 'timetable') {
+        const section = document.getElementById('timetable-list');
+        const offset = 100; 
+        const bodyRect = document.body.getBoundingClientRect().top;
+        const elementRect = section.getBoundingClientRect().top;
+        const elementPosition = elementRect - bodyRect;
+        const offsetPosition = elementPosition - offset;
+        window.scrollTo({ top: offsetPosition, behavior: "smooth" });
+        highlightNav(1);
+    } else if (action === 'about') {
+        openModal('modal-about');
+        highlightNav(2);
+    } else if (action === 'contact') {
+        openModal('modal-contact');
+        highlightNav(3);
+    }
+}
+
+function highlightNav(index) {
+    const btns = document.querySelectorAll('.nav-btn');
+    if(btns[index]) {
+        btns[index].classList.remove('text-gray-400');
+        btns[index].classList.add('text-brand-600');
+    }
+}
+
+function openModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden'; 
+    }
+}
+
+function closeModals() {
+    const modals = document.querySelectorAll('[id^="modal-"]');
+    modals.forEach(m => m.classList.add('hidden'));
+    document.body.style.overflow = ''; 
+    highlightNav(0); 
+}
+
+// --- Init ---
 document.addEventListener('DOMContentLoaded', () => {
     safeCreateIcons();
     startCountdown();
@@ -219,24 +383,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (btn) {
         btn.addEventListener('click', toggleView);
     }
+
+    // Initialize the new Dua Slideshow
+    initDuaSlideshow();
 });
-
-// --- Function: Share App ---
-function shareApp() {
-    const shareData = {
-        title: 'Ramadan Timetable 2026',
-        text: 'Check out the Digital Ramadan Timetable for Mumbai 2026!',
-        url: window.location.href // Shares the current page link
-    };
-
-    // Check if browser supports native sharing (Works on most mobiles)
-    if (navigator.share) {
-        navigator.share(shareData)
-            .then(() => console.log('Shared successfully'))
-            .catch((err) => console.log('Error sharing:', err));
-    } else {
-        // Fallback for desktop: Copy to clipboard
-        navigator.clipboard.writeText(window.location.href);
-        alert('Link copied to clipboard!');
-    }
-}
