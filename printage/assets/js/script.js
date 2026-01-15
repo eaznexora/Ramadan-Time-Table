@@ -1,7 +1,5 @@
 // --- CONFIGURATION ---
-// Set to 'true' to simulate Ramadan (Feb 19) for testing.
-// Set to 'false' for Real World usage (Standard Date).
-const DEMO_MODE = false; 
+const DEMO_MODE = true; 
 
 // --- Helper: Safe Icon Initialization ---
 function safeCreateIcons() {
@@ -13,7 +11,6 @@ function safeCreateIcons() {
 // --- Helper: Get Date Object ---
 function getCurrentDate() {
     if (DEMO_MODE) {
-        // SIMULATION: Feb 19, 2026 at 5:00 PM (Approaching Iftar)
         return new Date("2026-02-19T17:00:00"); 
     }
     return new Date();
@@ -66,7 +63,6 @@ const INITIAL_COUNT = 5;
 // --- Render Row ---
 function createRowHtml(item, animate = false) {
     const todayString = getTodayString();
-    // Fix: Case Insensitive Comparison
     const isToday = (item.date.toLowerCase() === todayString.toLowerCase()); 
 
     let cardClass = isToday 
@@ -147,21 +143,18 @@ function toggleView() {
     }
 }
 
-// --- SMART COUNTDOWN LOGIC (NO BLINKING + GREEN TEXT) ---
+// --- SMART COUNTDOWN LOGIC ---
 
 function parseTime(timeStr, baseDate) {
     const [time, modifier] = timeStr.split(' ');
     let [hours, minutes] = time.split(':');
-    
     if (hours === '12') { hours = '00'; }
     if (modifier === 'PM') { hours = parseInt(hours, 10) + 12; }
-    
     const date = new Date(baseDate);
     date.setHours(hours, minutes, 0, 0);
     return date;
 }
 
-// Variables to track state and prevent blinking
 let lastLabelState = "";
 let lastDuaState = "";
 
@@ -189,71 +182,57 @@ function startCountdown() {
         let duaText = "";
         let showDays = true; 
 
-        // 1. BEFORE RAMADAN
         if (now < ramadanStartDate) {
             targetDate = ramadanStartDate;
             labelText = "Ramadan Begins In";
             duaText = `<p class="text-sm text-brand-600 font-medium">Prepare your heart and time for Ramadan</p>`;
             showDays = true;
-        } 
-        // 2. DURING RAMADAN
-        else {
+        } else {
             showDays = false; 
-
             const month = now.toLocaleString('default', { month: 'short' }); 
             const day = String(now.getDate()).padStart(2, '0');
             const todayStr = `${month} ${day}`;
-            
             const todayData = fullTimetableData.find(d => d.date.toLowerCase() === todayStr.toLowerCase());
 
             if (todayData) {
                 const sehriTime = parseTime(todayData.sehri, now);
                 const iftarTime = parseTime(todayData.iftar, now);
 
-                // A. BEFORE SEHRI
                 if (now < sehriTime) {
                     targetDate = sehriTime;
                     labelText = `SEHRI ENDS IN <span class="text-brand-500">(ROZA ${todayData.roza})</span>`;
                     
-                    // FIXED: Added text-brand-600 for green Arabic text
+                    // ADJUSTED SIZE TO text-2xl AND ADDED EXTRA MARGINS
                     duaText = `
-                        <div class="animate-fade-in mt-2">
-                            <span class="text-[10px] text-brand-600 font-bold uppercase tracking-widest block mb-2">SEHRI DUA (INTENTION)</span>
-                            <p class="arabic-text text-2xl text-brand-600 font-bold mb-2">وَبِصَوْمِ غَدٍ نَّوَيْتُ مِنْ شَهْرِ رَمَضَانَ</p>
+                        <div class="animate-fade-in mt-4">
+                            <span class="text-[10px] text-brand-600 font-bold uppercase tracking-widest block mb-5">SEHRI DUA (INTENTION)</span>
+                            <p class="arabic-text text-2xl text-brand-600 font-bold mb-3">وَبِصَوْمِ غَدٍ نَّوَيْتُ مِنْ شَهْرِ رَمَضَانَ</p>
                             <p class="text-xs italic text-gray-500">Wa bisawmi ghadinn nawaiytu min shahri ramadan</p>
                         </div>
                     `;
-                }
-                // B. BETWEEN SEHRI & IFTAR
-                else if (now >= sehriTime && now < iftarTime) {
+                } else if (now >= sehriTime && now < iftarTime) {
                     targetDate = iftarTime;
                     labelText = `IFTAR BEGINS IN <span class="text-brand-500">(ROZA ${todayData.roza})</span>`;
                     
-                    // FIXED: Added text-brand-600 for green Arabic text
                     duaText = `
-                        <div class="animate-fade-in mt-2">
-                            <span class="text-[10px] text-brand-600 font-bold uppercase tracking-widest block mb-2">IFTAR DUA (OPENING)</span>
-                            <p class="arabic-text text-2xl text-brand-600 font-bold mb-2">اللَّهُمَّ إِنِّي لَكَ صُمْتُ وَعَلَيْكَ تَوَكَّلْتُ وَعَلَى رِزْقِكَ أَفْطَرْتُ</p>
+                        <div class="animate-fade-in mt-4">
+                            <span class="text-[10px] text-brand-600 font-bold uppercase tracking-widest block mb-5">IFTAR DUA (OPENING)</span>
+                            <p class="arabic-text text-2xl text-brand-600 font-bold mb-3">اللَّهُمَّ إِنِّي لَكَ صُمْتُ وَعَلَيْكَ تَوَكَّلْتُ وَعَلَى رِزْقِكَ أَفْطَرْتُ</p>
                             <p class="text-xs italic text-gray-500">Allahumma inni laka sumtu wa 'alayka tawakkaltu wa 'ala rizqika aftartu</p>
                         </div>
                     `;
-                }
-                // C. AFTER IFTAR
-                else {
+                } else {
                     const tomorrowIndex = fullTimetableData.indexOf(todayData) + 1;
                     if (tomorrowIndex < fullTimetableData.length) {
                         const tomorrowData = fullTimetableData[tomorrowIndex];
                         const tomorrowBase = new Date(now);
                         tomorrowBase.setDate(tomorrowBase.getDate() + 1);
-                        
                         targetDate = parseTime(tomorrowData.sehri, tomorrowBase);
                         labelText = `SEHRI ENDS IN <span class="text-brand-500">(ROZA ${tomorrowData.roza})</span>`;
-                        
-                        // FIXED: Added text-brand-600 for green Arabic text
                         duaText = `
-                            <div class="animate-fade-in mt-2">
-                                <span class="text-[10px] text-brand-600 font-bold uppercase tracking-widest block mb-2">SEHRI DUA (INTENTION)</span>
-                                <p class="arabic-text text-2xl text-brand-600 font-bold mb-2">وَبِصَوْمِ غَدٍ نَّوَيْتُ مِنْ شَهْرِ رَمَضَانَ</p>
+                            <div class="animate-fade-in mt-4">
+                                <span class="text-[10px] text-brand-600 font-bold uppercase tracking-widest block mb-5">SEHRI DUA (INTENTION)</span>
+                                <p class="arabic-text text-2xl text-brand-600 font-bold mb-3">وَبِصَوْمِ غَدٍ نَّوَيْتُ مِنْ شَهْرِ رَمَضَانَ</p>
                                 <p class="text-xs italic text-gray-500">Wa bisawmi ghadinn nawaiytu min shahri ramadan</p>
                             </div>
                         `;
@@ -270,7 +249,6 @@ function startCountdown() {
             }
         }
 
-        // STATE CHECK: Only update innerHTML if content CHANGED (Prevents Blinking)
         if (titleElement && labelText !== lastLabelState) {
             titleElement.innerHTML = labelText;
             lastLabelState = labelText;
@@ -281,17 +259,14 @@ function startCountdown() {
             lastDuaState = duaText;
         }
 
-        // Toggle Days Visibility
         if (blockDays && sepDays) {
             const displayStyle = showDays ? 'flex' : 'none';
             blockDays.style.display = displayStyle;
             sepDays.style.display = displayStyle;
         }
 
-        // Timer Update (Always runs)
         if (targetDate) {
             const distance = targetDate - now;
-
             const days = Math.floor(distance / (1000 * 60 * 60 * 24));
             const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
@@ -307,7 +282,6 @@ function startCountdown() {
             if (mEl) mEl.innerText = minutes >= 0 ? String(minutes).padStart(2, '0') : "00";
             if (sEl) sEl.innerText = seconds >= 0 ? String(seconds).padStart(2, '0') : "00";
         }
-
     }, 1000);
 }
 
@@ -318,11 +292,8 @@ function shareApp() {
         text: '🌙 *Ramadan Timetable 2026 - Mumbai*\n\nView the complete digital timetable with daily Sehri & Iftar timings, Duas, and more.\n\nClick here to view:',
         url: window.location.href
     };
-
     if (navigator.share) {
-        navigator.share(shareData)
-            .then(() => console.log('Shared successfully'))
-            .catch((err) => console.log('Error sharing:', err));
+        navigator.share(shareData).catch((err) => console.log('Error sharing:', err));
     } else {
         navigator.clipboard.writeText(window.location.href)
             .then(() => alert('Link copied to clipboard!'))
@@ -330,36 +301,18 @@ function shareApp() {
     }
 }
 
-// --- Navigation & Modals ---
+// --- Nav & Modals ---
 function navAction(action) {
-    const btns = document.querySelectorAll('.nav-btn');
-    btns.forEach(btn => {
-        btn.classList.remove('text-brand-600');
-        btn.classList.add('text-gray-400');
-    });
-
     if (action === 'home') {
         window.scrollTo({ top: 0, behavior: 'smooth' });
-        highlightNav(0);
     } else if (action === 'timetable') {
         const section = document.getElementById('timetable-list');
         const offset = 100; 
         window.scrollTo({ top: section.getBoundingClientRect().top + window.scrollY - offset, behavior: "smooth" });
-        highlightNav(1);
     } else if (action === 'about') {
         openModal('modal-about');
-        highlightNav(2);
     } else if (action === 'contact') {
         openModal('modal-contact');
-        highlightNav(3);
-    }
-}
-
-function highlightNav(index) {
-    const btns = document.querySelectorAll('.nav-btn');
-    if(btns[index]) {
-        btns[index].classList.remove('text-gray-400');
-        btns[index].classList.add('text-brand-600');
     }
 }
 
@@ -375,7 +328,6 @@ function closeModals() {
     const modals = document.querySelectorAll('[id^="modal-"]');
     modals.forEach(m => m.classList.add('hidden'));
     document.body.style.overflow = ''; 
-    highlightNav(0); 
 }
 
 // --- DUA SLIDESHOW ---
@@ -409,11 +361,14 @@ function initDuaSlideshow() {
     const indicatorsContainer = document.getElementById('dua-indicators');
     if (!slidesContainer || !indicatorsContainer) return;
 
+    slidesContainer.innerHTML = '';
+    indicatorsContainer.innerHTML = '';
+
     duaData.forEach((dua, index) => {
         const slideHtml = `
             <div class="w-full flex-shrink-0 px-4">
                 <div class="text-center flex flex-col justify-center h-full">
-                    <p class="arabic-text text-2xl mb-3 font-arabic leading-loose">${dua.arabic}</p>
+                    <p class="arabic-text text-2xl mb-3 font-arabic leading-loose text-brand-600">${dua.arabic}</p>
                     <p class="text-gray-600 text-sm italic mb-2">(${dua.transliteration})</p>
                     <p class="text-gray-800 text-sm font-medium">"${dua.translation}"</p>
                     <p class="text-xs text-gray-400 mt-3">${dua.reference}</p>
@@ -433,6 +388,7 @@ function initDuaSlideshow() {
     document.getElementById('prev-dua').addEventListener('click', () => { prevDuaSlide(); resetDuaInterval(); });
     document.getElementById('next-dua').addEventListener('click', () => { nextDuaSlide(); resetDuaInterval(); });
 
+    updateDuaCarousel();
     startDuaSlideshow();
 }
 
@@ -457,7 +413,6 @@ function goToDuaSlide(index) { currentDuaIndex = index; updateDuaCarousel(); }
 function startDuaSlideshow() { duaSlideInterval = setInterval(nextDuaSlide, duaIntervalTime); }
 function resetDuaInterval() { clearInterval(duaSlideInterval); startDuaSlideshow(); }
 
-// --- Scroll Animation ---
 function initScrollAnimations() {
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -471,17 +426,12 @@ function initScrollAnimations() {
     elements.forEach(el => observer.observe(el));
 }
 
-// --- Init ---
 document.addEventListener('DOMContentLoaded', () => {
     safeCreateIcons();
     startCountdown();
     renderTimetable();
-    
     const btn = document.getElementById('view-all-btn');
     if (btn) { btn.addEventListener('click', toggleView); }
-
     initDuaSlideshow();
     initScrollAnimations(); 
-
 });
-
