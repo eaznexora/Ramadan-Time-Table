@@ -1,7 +1,7 @@
 // --- CONFIGURATION ---
 // Set to 'true' to simulate Ramadan (Feb 19) for testing.
 // Set to 'false' for Real World usage (Standard Date).
-const DEMO_MODE = true; 
+const DEMO_MODE = false; 
 
 // --- Helper: Safe Icon Initialization ---
 function safeCreateIcons() {
@@ -484,3 +484,4 @@ document.addEventListener('DOMContentLoaded', () => {
     initScrollAnimations(); 
 
 });
+
