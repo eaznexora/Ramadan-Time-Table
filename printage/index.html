@@ -1,6 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script>
+        // This ensures the browser treats this page as a folder, not a file.
+        // It fixes the issue where the wrong assets (CSS/JS) are loaded.
+        if (!window.location.pathname.endsWith('/') && !window.location.pathname.endsWith('.html')) {
+            var newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + "/" + window.location.search;
+            window.history.replaceState(null, '', newUrl); // Updates URL bar visually
+            // Optional: Reload if assets are strictly broken, but often replaceState is enough for relative links if done early.
+            // If the layout breaks, uncomment the next line:
+            // window.location.href = newUrl; 
+        }
+    </script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ramadan Timetable 2026 - Digital Card</title>
@@ -67,7 +79,6 @@
 
         <section class="px-5 -mt-6 relative z-20 reveal">
             <div class="bg-white rounded-2xl shadow-md p-5 border border-gray-100">
-                
                 <h3 id="countdown-title" class="text-center text-xs font-semibold text-gray-500 uppercase tracking-wide mb-4">Ramadan Begins In</h3>
                 
                 <div class="flex justify-center gap-2 text-center" id="countdown-container">
