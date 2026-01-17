@@ -141,6 +141,42 @@
         .img-pos-digital { margin-top: 12px; }
         .spacer-printed { height: 24px; }
         .spacer-digital { height: 14px; }
+
+        /* === NEW FEATURE LIST STYLES === */
+        .feature-bar {
+            width: 100%;
+            height: 52px;
+            background: #70B7AC;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            padding-left: 23px; /* Based on Figma (39 - 16) */
+            position: relative;
+        }
+        
+        .feature-text {
+            font-family: 'Poppins', sans-serif;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 18px;
+            line-height: 154.22%;
+            color: #0E3D36;
+            margin-left: 19px; /* Gap between icon and text */
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* Adjustments for mobile responsiveness on very small screens */
+        @media (max-width: 400px) {
+            .feature-text {
+                font-size: 14px;
+                margin-left: 10px;
+            }
+            .feature-bar {
+                padding-left: 15px;
+            }
+        }
     </style>
 </head>
 <body class="bg-[#032018] text-white font-sans antialiased overflow-x-hidden">
@@ -175,7 +211,6 @@
         </div>
 
         <div class="flex flex-wrap justify-center items-start gap-[15px]">
-            
             <div class="figma-card bg-printed shadow-md">
                 <div class="img-pos-printed">
                     <img src="assets/images/Card.png" alt="Printed Card" style="width: 148px; height: 121px; object-fit: contain;">
@@ -205,12 +240,40 @@
                     <li>No need to carry anything</li>
                 </ul>
             </div>
-
         </div>
 
-        <div class="text-center mt-[32px] px-4">
+        <div class="text-center mt-[32px] mb-[22px] px-4">
             <h2 class="figma-heading">FROM PRINTED TO DIGITAL</h2>
             <p class="figma-subheading">Designed to improve access for everyone</p>
+        </div>
+
+        <div class="flex flex-col w-full max-w-[398px] px-4 gap-[8px]">
+            
+            <div class="feature-bar">
+                <img src="assets/icons/Clock.svg" alt="Clock" style="width: 40px; height: 40px;">
+                <span class="feature-text">Live Sehri & Iftar Countdown</span>
+            </div>
+
+            <div class="feature-bar">
+                <img src="assets/icons/Daily.svg" alt="Daily" style="width: 40px; height: 40px;">
+                <span class="feature-text">Daily Roza Details</span>
+            </div>
+
+            <div class="feature-bar">
+                <img src="assets/icons/City.svg" alt="City" style="width: 40px; height: 40px;">
+                <span class="feature-text">City Selection Control</span>
+            </div>
+
+            <div class="feature-bar">
+                <img src="assets/icons/dua.svg" alt="Dua" style="width: 40px; height: 40px;">
+                <span class="feature-text">Ashrah-wise Duas</span>
+            </div>
+
+            <div class="feature-bar">
+                <img src="assets/icons/Link.svg" alt="Link" style="width: 40px; height: 40px;">
+                <span class="feature-text">Permanent Shareable Link</span>
+            </div>
+
         </div>
 
     </section>
@@ -220,4 +283,3 @@
     </script>
 </body>
 </html>
-
