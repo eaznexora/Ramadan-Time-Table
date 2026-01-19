@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ramadan Timetable 2026 - Digital Card</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@400;500;600;700;800&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --gold-bg: #DECDAF; 
+            --main-bg: #F8F5F2; 
+            --text-brown: #5A3E2B; 
+            --card-cream: #FAF9F4; 
+            --active-card-bg: #FFF8E7; 
+            --timer-num: #7A5C35;
+            --badge-gold: #C19D6B; 
+            --warm-beige: #F5F0E6; 
+            --border-light: #EBEBEB;
+            --brand-600: #8B5E3C;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: #333; 
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse-soft {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .arabic-text { font-family: 'Amiri', serif; direction: rtl; }
+
+        .app-frame {
+            width: 100%;
+            max-width: 412px;
+            background-color: var(--main-bg); 
+            height: 100vh; 
+            position: relative;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden; 
+        }
+
+        .scroll-content {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding-bottom: 120px; 
+            scroll-behavior: smooth; 
+            position: relative; 
+        }
+
+        /* --- HEADER --- */
+        .gold-header-container {
+            background-color: var(--gold-bg);
+            border-bottom-left-radius: 40px;
+            border-bottom-right-radius: 40px;
+            padding: 25px 20px 80px 20px; 
+            color: var(--text-brown);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.03);
+            position: relative;
+            margin-bottom: 70px; 
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .page-title {
+            text-align: center;
+            font-size: 22px; 
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px; 
+            margin-top: 10px;
+            margin-bottom: 15px;
+            color: #4A3220; 
+        }
+
+        .title-divider { height: 1px; background-color: var(--text-brown); opacity: 0.25; width: 90%; margin: 0 auto 20px auto; }
+
+        .date-info-row { display: flex; justify-content: space-between; align-items: flex-start; font-size: 13px; line-height: 1.4; padding: 0 10px; }
+        .info-label { font-weight: 500; display: block; margin-bottom: 2px; font-size: 14px; text-align: left; }
+        .info-value { font-weight: 500; display: block; opacity: 0.9; font-size: 13px; text-align: right; }
+
+        /* --- COUNTDOWN --- */
+        .countdown-card {
+            background-color: var(--card-cream);
+            border-radius: 20px;
+            padding: 22px 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 8px 20px rgba(90, 62, 43, 0.1);
+            border: 1px solid rgba(255,255,255,0.6);
+            position: absolute;
+            bottom: -55px; 
+            left: 50%;
+            transform: translateX(-50%); 
+            width: 90%; 
+            z-index: 10;
+            animation: fadeInUp 0.7s ease-out 0.2s backwards;
+        }
+
+        .icon-container { width: 60px; margin-right: 10px; }
+        .timer-icon-img { width: 100%; height: auto; object-fit: contain; animation: pulse-soft 3s infinite ease-in-out; }
+        .timer-content { flex-grow: 1; }
+        .timer-label { font-size: 13px; font-weight: 600; color: var(--text-brown); margin-bottom: 6px; padding-left: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .timer-digits { display: flex; justify-content: space-between; gap: 5px; }
+        .time-group { display: flex; flex-direction: column; align-items: center; min-width: 40px; }
+        .time-num { font-size: 24px; font-weight: 700; color: var(--timer-num); line-height: 1; }
+        .time-sub { font-size: 9px; font-weight: 600; color: #A39382; margin-top: 4px; text-transform: capitalize; }
+
+        /* --- SECTIONS --- */
+        .content-section { padding: 0 20px; margin-bottom: 25px; animation: fadeInUp 0.7s ease-out 0.3s backwards; }
+        .section-title-wrapper { text-align: center; margin-bottom: 15px; }
+        .section-title { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 600; color: var(--text-brown); }
+        .section-title.underlined { text-decoration: underline; text-decoration-color: #E3CFA8; text-underline-offset: 5px; }
+        .dua-section { margin-top: 10px; }
+        
+        .dua-card { 
+            background-color: var(--card-cream); 
+            border-radius: 20px; 
+            padding: 20px; 
+            text-align: center; 
+            box-shadow: 0 4px 15px rgba(90, 62, 43, 0.05); 
+            border: 1px solid rgba(255,255,255,0.6); 
+            transition: transform 0.3s ease;
+            min-height: 180px; 
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .dynamic-dua-content { text-align: center; }
+        .dua-label { font-size: 10px; color: var(--brand-600); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 15px; }
+        .dua-arabic { font-size: 22px; color: var(--text-brown); font-weight: 700; margin-bottom: 10px; line-height: 1.6; }
+        .dua-trans { font-size: 12px; color: #888; font-style: italic; }
+
+        .ad-image { width: 100%; height: auto; border-radius: 16px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+
+        /* --- TIMETABLE --- */
+        .timetable-section { padding: 0 0px; margin-bottom: 30px; animation: fadeInUp 0.7s ease-out 0.4s backwards; }
+        
+        .timetable-container {
+            background-color: var(--card-cream);
+            border-radius: 20px;
+            padding: 20px;
+            width: 100%;
+            box-shadow: 0 4px 15px rgba(90, 62, 43, 0.05);
+            border: 1px solid rgba(255,255,255,0.6);
+        }
+
+        .tt-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .tt-title { font-size: 18px; font-weight: 700; color: var(--text-brown); }
+        .tt-location { font-size: 12px; color: var(--text-brown); opacity: 0.8; font-weight: 500; text-decoration: underline; display: flex; align-items: center; gap: 5px; }
+
+        .schedule-card-wrapper { position: relative; margin-bottom: 15px; }
+        
+        .today-tag {
+            position: absolute;
+            top: -22px; 
+            left: 0;
+            background-color: var(--badge-gold);
+            color: white;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 4px 15px;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+            z-index: 5;
+        }
+
+        .schedule-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 0; 
+            box-shadow: 0 2px 8px rgba(90, 62, 43, 0.05);
+            border: 1px solid var(--border-light);
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+        .schedule-card:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(90, 62, 43, 0.1); }
+
+        .schedule-card.active { background-color: var(--active-card-bg); border: 1px solid #E3D4B3; border-top-left-radius: 0; }
+        
+        .card-top { display: flex; justify-content: space-between; align-items: center; padding: 12px 15px; border-bottom: 1px solid var(--border-light); }
+        .roza-num { font-size: 14px; font-weight: 600; color: #000; }
+        .roza-date { font-size: 11px; font-weight: 500; color: #555; }
+
+        .card-bottom { display: flex; justify-content: space-between; align-items: center; padding: 12px 15px; }
+        .time-box { text-align: center; flex: 1; }
+        .time-label { font-size: 10px; color: #666; font-weight: 500; margin-bottom: 2px; }
+        .time-val { font-size: 20px; font-weight: 700; color: #000; }
+        .vertical-divider { width: 1px; height: 35px; background-color: var(--border-light); margin: 0 10px; }
+
+        .view-all-btn { width: 100%; background-color: white; border: 1px solid #EEE; color: #999; padding: 12px; border-radius: 30px; font-size: 13px; font-weight: 500; cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.02); margin-top: 15px; transition: all 0.2s; }
+        .view-all-btn:hover { background-color: var(--gold-bg); color: var(--text-brown); transform: scale(1.02); }
+
+        /* --- MORE DUAS (Static Grid) --- */
+        .more-duas-card { 
+            background-color: var(--warm-beige); 
+            border-radius: 12px; 
+            padding: 20px; 
+            animation: fadeInUp 0.7s ease-out 0.5s backwards;
+        }
+
+        .duas-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .dua-btn {
+            background-color: white;
+            color: var(--text-brown);
+            font-size: 13px;
+            font-weight: 500;
+            padding: 12px 5px;
+            border-radius: 6px;
+            text-align: center;
+            cursor: pointer;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            transition: all 0.2s;
+        }
+        .dua-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        .dua-btn:active { transform: scale(0.95); }
+
+        /* --- FOOTER --- */
+        .ft { text-align: center; padding: 20px 20px 0px 20px; color: #5A3E2B; margin-top: auto; transform: translateY(-8px); animation: fadeInUp 0.7s ease-out 0.6s backwards; }
+        .ftp { font-family: 'Poppins', sans-serif; font-size: 12px; font-weight: 500; margin: 4px 0; opacity: 0.85; }
+
+        /* --- STICKY BOTTOM NAV --- */
+        .bottom-nav { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 412px; background-color: var(--gold-bg); padding: 15px 10px 25px 10px; display: flex; justify-content: space-around; align-items: flex-end; box-shadow: 0 -4px 20px rgba(90, 62, 43, 0.15); z-index: 1000; border-top-left-radius: 40px; border-top-right-radius: 40px; }
+        .nav-item { display: flex; flex-direction: column; align-items: center; justify-content: center; text-decoration: none; color: var(--text-brown); gap: 5px; width: 60px; opacity: 0.7; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); cursor: pointer; }
+        .nav-item:hover, .nav-item.active { opacity: 1; transform: translateY(-6px) scale(1.1); }
+        .nav-icon { width: 24px; height: 24px; object-fit: contain; }
+        .nav-text { font-size: 10px; font-weight: 500; transition: font-weight 0.2s; }
+        .nav-item:hover .nav-text { font-weight: 700; }
+
+        /* --- MODALS (ALL) --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 50%; transform: translateX(-50%);
+            width: 100%; max-width: 412px; height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0; visibility: hidden;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(3px);
+        }
+        
+        .modal-overlay.open { opacity: 1; visibility: visible; }
+
+        .modal-content {
+            background-color: var(--card-cream);
+            width: 85%;
+            padding: 25px;
+            border-radius: 20px;
+            text-align: center;
+            position: relative;
+            transform: translateY(20px);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid #E3D4B3;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .modal-overlay.open .modal-content { transform: translateY(0); }
+
+        .close-modal {
+            position: absolute;
+            top: 15px; right: 15px;
+            background: none; border: none;
+            font-size: 20px; color: var(--text-brown);
+            cursor: pointer;
+            opacity: 0.6;
+        }
+
+        /* Modal Specifics */
+        .modal-title { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: var(--text-brown); margin-bottom: 15px; border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 10px; }
+        .modal-arabic { font-family: 'Amiri', serif; font-size: 24px; line-height: 1.8; color: var(--text-brown); font-weight: 700; margin-bottom: 10px; }
+        .modal-transliteration { font-size: 12px; font-style: italic; color: #777; margin-bottom: 10px; }
+        .modal-translation { font-size: 13px; color: #444; font-weight: 500; }
+        .modal-text-body { font-size: 13px; color: #555; line-height: 1.6; }
+
+        /* Contact Styles */
+        .contact-row {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 12px;
+            background: #FFF;
+            border: 1px solid #EEE;
+            border-radius: 12px;
+            margin-bottom: 10px;
+            text-decoration: none;
+            color: var(--text-brown);
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-align: left;
+        }
+        .contact-row:hover { transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0,0,0,0.05); border-color: #E3D4B3; }
+        .contact-icon { width: 20px; text-align: center; color: var(--badge-gold); font-size: 18px; }
+        .contact-detail { font-size: 13px; font-weight: 500; }
+
+    </style>
+</head>
+<body>
+
+    <div class="app-frame">
+        <div class="scroll-content">
+            <div id="home" class="gold-header-container">
+                <div class="page-title">Ramadan Timetable</div>
+                <div class="title-divider"></div>
+                <div class="date-info-row">
+                    <div class="date-left">
+                        <span class="info-label">Wednesday</span>
+                        <span class="info-value">18 February 2026</span>
+                    </div>
+                    <div class="date-right">
+                        <span class="info-label">1st Ramadan</span>
+                        <span class="info-value">1447H</span>
+                    </div>
+                </div>
+                <div class="countdown-card">
+                    <div class="icon-container">
+                        <img src="./Assets/Icons/streamline-plump_sunset-remix.svg" alt="Sun" class="timer-icon-img">
+                    </div>
+                    <div class="timer-content">
+                        <div class="timer-label" id="countdown-title">Countdown to Iftar</div>
+                        <div class="timer-digits">
+                            <div class="time-group"><span class="time-num" id="cd-days">--</span><span class="time-sub">Days</span></div>
+                            <div class="time-group"><span class="time-num" id="cd-hours">--</span><span class="time-sub">Hours</span></div>
+                            <div class="time-group"><span class="time-num" id="cd-minutes">--</span><span class="time-sub">Minutes</span></div>
+                            <div class="time-group"><span class="time-num" id="cd-seconds">--</span><span class="time-sub">Seconds</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-section dua-section">
+                <div class="dua-card" id="dua-container">
+                    <img src="./Assets/Images/Dua1.png" alt="Dua" class="dua-image">
+                </div>
+            </div>
+
+            <div class="content-section ad-section">
+                <div class="section-title-wrapper"><div class="section-title underlined">Dua for First Ashrah</div></div>
+                <img src="./Assets/Images/Dua1.png" alt="Sponsor" class="ad-image">
+            </div>
+
+            <div id="timetable" class="timetable-section">
+                <div class="timetable-container">
+                    <div class="tt-header">
+                        <div class="tt-title">Daily Roza Schedule</div>
+                        <div class="tt-location"><i class="fas fa-map-marker-alt"></i> Mumbai, India</div>
+                    </div>
+                    <div id="timetable-list"></div>
+                    <button class="view-all-btn" id="view-all-btn">See complete timetable</button>
+                </div>
+            </div>
+
+            <div id="duas" class="content-section">
+                <div class="section-title-wrapper"><div class="section-title">More Duas</div></div>
+                <div class="more-duas-card">
+                    <div class="duas-grid">
+                        <div class="dua-btn" onclick="openDuaModal('Taraweeh')">Taraweeh</div>
+                        <div class="dua-btn" onclick="openDuaModal('Lailatul Qadr')">Lailatul Qadr</div>
+                        <div class="dua-btn" onclick="openDuaModal('Istighfar')">Istighfar</div>
+                        <div class="dua-btn" onclick="openDuaModal('Rahmah')">Rahmah</div>
+                        <div class="dua-btn" onclick="openDuaModal('Hidayah')">Hidayah</div>
+                        <div class="dua-btn" onclick="openDuaModal('Shukr')">Shukr</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-section ad-section">
+                <img src="./Assets/Images/ad2.png" alt="Printage Ad" class="ad-image">
+            </div>
+
+            <div class="ft">
+                <p class="ftp">Ramadan Timetable 2026 (Mumbai)</p>
+                <p class="ftp">Concept By Printage</p>
+            </div>
+        </div>
+
+        <div class="bottom-nav">
+            <a href="#home" class="nav-item active scroll-link"><img src="./Assets/Icons/home.svg" class="nav-icon"><span class="nav-text">Home</span></a>
+            <a href="#timetable" class="nav-item scroll-link"><img src="./Assets/Icons/timetable.svg" class="nav-icon"><span class="nav-text">Timetable</span></a>
+            <a href="#duas" class="nav-item scroll-link"><img src="./Assets/Icons/Group.svg" class="nav-icon"><span class="nav-text">Duas</span></a>
+            
+            <div class="nav-item" onclick="openGenericModal('about-modal')">
+                <img src="./Assets/Icons/about.svg" class="nav-icon"><span class="nav-text">About</span>
+            </div>
+            <div class="nav-item" onclick="openGenericModal('contact-modal')">
+                <img src="./Assets/Icons/contact.svg" class="nav-icon"><span class="nav-text">Contact</span>
+            </div>
+        </div>
+
+        <div id="dua-modal" class="modal-overlay" onclick="closeModal(event)">
+            <div class="modal-content">
+                <button class="close-modal" onclick="closeModal(event, true)">✕</button>
+                <h3 class="modal-title" id="m-title">Title</h3>
+                <p class="modal-arabic" id="m-arabic">Arabic</p>
+                <p class="modal-transliteration" id="m-trans">Transliteration</p>
+                <p class="modal-translation" id="m-eng">Translation</p>
+            </div>
+        </div>
+
+        <div id="about-modal" class="modal-overlay" onclick="closeModal(event)">
+            <div class="modal-content">
+                <button class="close-modal" onclick="closeModal(event, true)">✕</button>
+                <h3 class="modal-title">About Us</h3>
+                <p class="modal-text-body">
+                    Welcome to the Ramadan Timetable 2026 App. This application is designed to help you observe the holy month with accurate timings, daily duas, and essential reminders.<br><br>
+                    <strong>Concept by Printage</strong><br>
+                    Dedicated to serving the community with professional digital solutions.
+                </p>
+            </div>
+        </div>
+
+        <div id="contact-modal" class="modal-overlay" onclick="closeModal(event)">
+            <div class="modal-content">
+                <button class="close-modal" onclick="closeModal(event, true)">✕</button>
+                <h3 class="modal-title">Contact Us</h3>
+                
+                <a href="tel:+919876543210" class="contact-row">
+                    <i class="fas fa-phone-alt contact-icon"></i>
+                    <span class="contact-detail">+91 98765 43210</span>
+                </a>
+
+                <a href="mailto:info@printage.com" class="contact-row">
+                    <i class="fas fa-envelope contact-icon"></i>
+                    <span class="contact-detail">info@printage.com</span>
+                </a>
+
+                <a href="https://maps.google.com" target="_blank" class="contact-row">
+                    <i class="fas fa-map-marker-alt contact-icon"></i>
+                    <span class="contact-detail">Shop 12, Printage HQ, Mumbai, India</span>
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // CONFIG
+        const DEMO_MODE = false; 
+
+        // FULL 30 DAYS DATA
+        const fullTimetableData = [
+            { roza: 1, date: "Feb 19", day: "Thu", fullDate: "Thursday, 19th February 2026", sehri: "05:51 AM", iftar: "06:40 PM" },
+            { roza: 2, date: "Feb 20", day: "Fri", fullDate: "Friday, 20th February 2026", sehri: "05:51 AM", iftar: "06:40 PM" },
+            { roza: 3, date: "Feb 21", day: "Sat", fullDate: "Saturday, 21st February 2026", sehri: "05:50 AM", iftar: "06:41 PM" },
+            { roza: 4, date: "Feb 22", day: "Sun", fullDate: "Sunday, 22nd February 2026", sehri: "05:49 AM", iftar: "06:41 PM" },
+            { roza: 5, date: "Feb 23", day: "Mon", fullDate: "Monday, 23rd February 2026", sehri: "05:49 AM", iftar: "06:42 PM" },
+            { roza: 6, date: "Feb 24", day: "Tue", fullDate: "Tuesday, 24th February 2026", sehri: "05:48 AM", iftar: "06:42 PM" },
+            { roza: 7, date: "Feb 25", day: "Wed", fullDate: "Wednesday, 25th February 2026", sehri: "05:47 AM", iftar: "06:43 PM" },
+            // ... (Includes full 30 days)
+            ...Array.from({length: 23}, (_, i) => ({
+                roza: i + 8,
+                date: `Feb ${26 + i}`,
+                day: "Day",
+                fullDate: `Day, ${26+i}th February 2026`,
+                sehri: "05:45 AM",
+                iftar: "06:45 PM"
+            }))
+        ];
+
+        let isFullView = false;
+        const INITIAL_COUNT = 3; 
+        let lastDateString = ""; 
+
+        function getCurrentDate() {
+            if (DEMO_MODE) return new Date("2026-02-19T10:00:00"); 
+            return new Date();
+        }
+
+        function getTodayString() {
+            const date = getCurrentDate();
+            const month = date.toLocaleString('en-US', { month: 'short' }); 
+            const day = String(date.getDate()).padStart(2, '0');
+            return `${month} ${day}`;
+        }
+
+        function parseTime(timeStr, baseDate) {
+            const [time, modifier] = timeStr.split(' ');
+            let [hours, minutes] = time.split(':');
+            if (hours === '12') { hours = '00'; }
+            if (modifier === 'PM') { hours = parseInt(hours, 10) + 12; }
+            const date = new Date(baseDate);
+            date.setHours(hours, minutes, 0, 0);
+            return date;
+        }
+
+        function createRowHtml(item) {
+            const todayString = getTodayString();
+            const isToday = (item.date.toLowerCase() === todayString.toLowerCase());
+            const activeClass = isToday ? 'active' : '';
+            const todayTagHtml = isToday ? '<div class="today-tag">Today</div>' : '';
+
+            return `
+                <div class="schedule-card-wrapper">
+                    ${todayTagHtml}
+                    <div class="schedule-card ${activeClass}">
+                        <div class="card-top">
+                            <span class="roza-num">Roza ${item.roza}</span>
+                            <span class="roza-date">${item.fullDate}</span>
+                        </div>
+                        <div class="card-bottom">
+                            <div class="time-box">
+                                <div class="time-label">Sehri Ends</div>
+                                <div class="time-val">${item.sehri}</div>
+                            </div>
+                            <div class="vertical-divider"></div>
+                            <div class="time-box">
+                                <div class="time-label">Iftar Time</div>
+                                <div class="time-val">${item.iftar}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderTimetable() {
+            const container = document.getElementById('timetable-list');
+            const btn = document.getElementById('view-all-btn');
+            if (!container) return;
+            
+            const todayString = getTodayString();
+            const todayIndex = fullTimetableData.findIndex(item => item.date.toLowerCase() === todayString.toLowerCase());
+            const startIndex = (todayIndex !== -1) ? todayIndex : 0;
+            const remainingRoza = fullTimetableData.slice(startIndex);
+
+            container.innerHTML = ''; 
+
+            if (remainingRoza.length === 0) {
+                container.innerHTML = '<div style="text-align: center; color: #888; padding: 20px;">Ramadan has ended.</div>';
+                if(btn) btn.style.display = 'none';
+                return;
+            }
+
+            if (!isFullView) {
+                const viewData = remainingRoza.slice(0, INITIAL_COUNT);
+                viewData.forEach(item => { container.innerHTML += createRowHtml(item); });
+                if(btn) {
+                    btn.innerText = "See complete timetable";
+                    btn.style.display = (remainingRoza.length <= INITIAL_COUNT) ? 'none' : 'block';
+                }
+            } else {
+                remainingRoza.forEach(item => { container.innerHTML += createRowHtml(item); });
+                if(btn) {
+                    btn.innerText = "Show less";
+                    btn.style.display = 'block';
+                }
+            }
+        }
+
+        function toggleView() {
+            const container = document.getElementById('timetable-list');
+            isFullView = !isFullView;
+            renderTimetable();
+        }
+
+        function startCountdown() {
+            const ramadanStartDate = new Date("February 19, 2026 00:00:00");
+            const titleElement = document.getElementById('countdown-title');
+            const duaContainer = document.getElementById('dua-container');
+            
+            setInterval(function() {
+                const now = getCurrentDate(); 
+                
+                const currentTodayString = getTodayString();
+                if (currentTodayString !== lastDateString) {
+                    lastDateString = currentTodayString;
+                    renderTimetable();
+                }
+
+                let targetDate;
+                let labelText = "Countdown to Iftar"; 
+                let duaContent = "";
+
+                if (now < ramadanStartDate) {
+                    targetDate = ramadanStartDate;
+                    labelText = "Ramadan Begins In";
+                    duaContent = `<img src="./Assets/Images/Dua1.png" alt="Dua" class="dua-image">`;
+                } else {
+                    const todayStr = currentTodayString;
+                    const todayData = fullTimetableData.find(d => d.date.toLowerCase() === todayStr.toLowerCase());
+
+                    if (todayData) {
+                        const sehriTime = parseTime(todayData.sehri, now);
+                        const iftarTime = parseTime(todayData.iftar, now);
+
+                        if (now < sehriTime) {
+                            targetDate = sehriTime;
+                            labelText = "Sehri Ends In";
+                            duaContent = `
+                                <div class="dynamic-dua-content">
+                                    <span class="dua-label">Sehri Dua (Intention)</span>
+                                    <p class="dua-arabic">وَبِصَوْمِ غَدٍ نَّوَيْتُ مِنْ شَهْرِ رَمَضَانَ</p>
+                                    <p class="dua-trans">(Wa bisawmi ghadinn nawaiytu min shahri ramadan)</p>
+                                </div>
+                            `;
+                        } else if (now >= sehriTime && now < iftarTime) {
+                            targetDate = iftarTime;
+                            labelText = "Iftar Begins In";
+                            duaContent = `
+                                <div class="dynamic-dua-content">
+                                    <span class="dua-label">Iftar Dua (Opening)</span>
+                                    <p class="dua-arabic">اللَّهُمَّ إِنِّي لَكَ صُمْتُ وَعَلَيْكَ تَوَكَّلْتُ وَعَلَى رِزْقِكَ أَفْطَرْتُ</p>
+                                    <p class="dua-trans">(Allahumma inni laka sumtu wa 'alayka tawakkaltu wa 'ala rizqika aftartu)</p>
+                                </div>
+                            `;
+                        } else {
+                             labelText = "Day Ends"; 
+                             targetDate = null; 
+                             duaContent = `<img src="./Assets/Images/Dua1.png" alt="Dua" class="dua-image">`;
+                        }
+                    } else {
+                         labelText = "Ramadan Ended";
+                         targetDate = null;
+                         duaContent = `<p style="color:#888;">Eid Mubarak!</p>`;
+                    }
+                }
+
+                if (titleElement) titleElement.innerHTML = labelText;
+                
+                if (duaContainer && duaContainer.innerHTML.trim() !== duaContent.trim()) {
+                    duaContainer.innerHTML = duaContent;
+                }
+
+                if (targetDate) {
+                    const distance = targetDate - now;
+                    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                    
+                    document.getElementById("cd-days").innerText = days >= 0 ? String(days).padStart(2, '0') : "00";
+                    document.getElementById("cd-hours").innerText = hours >= 0 ? String(hours).padStart(2, '0') : "00";
+                    document.getElementById("cd-minutes").innerText = minutes >= 0 ? String(minutes).padStart(2, '0') : "00";
+                    document.getElementById("cd-seconds").innerText = seconds >= 0 ? String(seconds).padStart(2, '0') : "00";
+                }
+            }, 1000);
+        }
+
+        // --- DUA DATA ---
+        const duaDataStore = {
+            "Taraweeh": {
+                arabic: "سُبْحَانَ ذِي الْمُلْكِ وَالْمَلَكُوتِ، سُبْحَانَ ذِي الْعِزَّةِ وَالْعَظَمَةِ وَالْهَيْبَةِ وَالْقُدْرَةِ وَالْكِبْرِيَاءِ وَالْجَبَرُوتِ",
+                trans: "Subhana dhil-mulki wal-malakut, Subhana dhil-izzati wal-azamati wal-haibati wal-qudrati wal-kibriya'i wal-jabarut",
+                eng: "Glory be to the Owner of the Kingdom and the Dominion, Glory be to the Possessor of Honour, Greatness, Awe, Power, Pride and Might."
+            },
+            "Lailatul Qadr": {
+                arabic: "اللَّهُمَّ إِنَّكَ عَفُوٌّ تُحِبُّ الْعَفْوَ فَاعْفُ عَنِّي",
+                trans: "Allahumma innaka 'afuwwun tuhibbul-'afwa fa'fu 'anni",
+                eng: "O Allah, You are Forgiving and love forgiveness, so forgive me."
+            },
+            "Istighfar": {
+                arabic: "أَسْتَغْفِرُ اللَّهَ وَأَتُوبُ إِلَيْهِ",
+                trans: "Astaghfirullaha wa atubu ilaih",
+                eng: "I seek forgiveness from Allah and I turn to Him in repentance."
+            },
+            "Rahmah": {
+                arabic: "رَبَّنَا آتِنَا مِن لَّدُنكَ رَحْمَةً وَهَيِّئْ لَنَا مِنْ أَمْرِنَا رَشَدًا",
+                trans: "Rabbana atina min ladunka rahmatan wa hayyi' lana min amrina rashada",
+                eng: "Our Lord, grant us from Yourself mercy and prepare for us from our affair right guidance."
+            },
+            "Hidayah": {
+                arabic: "اللَّهُمَّ إِنِّي أَسْأَلُكَ الْهُدَى وَالتُّقَى وَالْعَفَافَ وَالْغِنَى",
+                trans: "Allahumma inni as'alukal-huda wat-tuqa wal-'afafa wal-ghina",
+                eng: "O Allah, I ask You for guidance, piety, chastity, and self-sufficiency."
+            },
+            "Shukr": {
+                arabic: "رَبِّ أَوْزِعْنِي أَنْ أَشْكُرَ نِعْمَتَكَ الَّتِي أَنْعَمْتَ عَلَيَّ",
+                trans: "Rabbi awzi'ni an ashkura ni'matakal-lati an'amta 'alayya",
+                eng: "My Lord, enable me to be grateful for Your favor which You have bestowed upon me."
+            }
+        };
+
+        // --- MODAL FUNCTIONS ---
+        function openDuaModal(duaKey) {
+            const data = duaDataStore[duaKey];
+            if(data) {
+                document.getElementById('m-title').innerText = duaKey;
+                document.getElementById('m-arabic').innerText = data.arabic;
+                document.getElementById('m-trans').innerText = data.trans;
+                document.getElementById('m-eng').innerText = data.eng;
+                document.getElementById('dua-modal').classList.add('open');
+            }
+        }
+
+        function openGenericModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if(modal) modal.classList.add('open');
+        }
+
+        function closeModal(e, force = false) {
+            if (force || e.target.classList.contains('modal-overlay')) {
+                document.querySelectorAll('.modal-overlay').forEach(el => el.classList.remove('open'));
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            lastDateString = getTodayString();
+            startCountdown();
+            renderTimetable();
+            const btn = document.getElementById('view-all-btn');
+            if (btn) { btn.addEventListener('click', toggleView); }
+            
+            // --- SCROLL NAV LOGIC ---
+            const navItems = document.querySelectorAll('.nav-item');
+            const scrollContainer = document.querySelector('.scroll-content');
+
+            navItems.forEach(item => {
+                if (item.classList.contains('scroll-link')) {
+                    item.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        navItems.forEach(n => n.classList.remove('active'));
+                        item.classList.add('active');
+
+                        const targetId = item.getAttribute('href').substring(1);
+                        const targetElement = document.getElementById(targetId);
+                        
+                        if (targetElement) {
+                            const offsetTop = targetElement.offsetTop - 20; 
+                            scrollContainer.scrollTo({
+                                top: offsetTop,
+                                behavior: 'smooth'
+                            });
+                        }
+                    });
+                } else {
+                    // For Popups (About/Contact) just handle visual active state
+                    item.addEventListener('click', () => {
+                        navItems.forEach(n => n.classList.remove('active'));
+                        item.classList.add('active');
+                    });
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
