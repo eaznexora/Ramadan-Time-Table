@@ -80,22 +80,57 @@
             animation: fadeInUp 0.6s ease-out;
         }
 
+        /* Title + Buttons Row */
+        .header-top-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-top: 5px;
+        }
+
         .page-title {
-            text-align: center;
+            text-align: left; 
             font-size: 22px; 
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 1px; 
-            margin-top: 10px;
-            margin-bottom: 15px;
+            margin: 0;
             color: #4A3220; 
         }
 
-        .title-divider { height: 1px; background-color: var(--text-brown); opacity: 0.25; width: 90%; margin: 0 auto 20px auto; }
+        .header-actions {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
 
-        .date-info-row { display: flex; justify-content: space-between; align-items: flex-start; font-size: 13px; line-height: 1.4; padding: 0 10px; }
-        .info-label { font-weight: 500; display: block; margin-bottom: 2px; font-size: 16px; text-align: left; }
-        .info-value { font-weight: 500; display: block; opacity: 0.9; font-size: 15px; text-align: right; }
+        .action-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            width: 24px;
+            height: 24px;
+            transition: transform 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .action-btn:hover { transform: scale(1.1); }
+        
+        .action-icon-img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .title-divider { height: 1px; background-color: var(--text-brown); opacity: 0.25; width: 100%; margin: 0 auto 20px auto; }
+
+        .date-info-row { display: flex; justify-content: space-between; align-items: flex-start; font-size: 13px; line-height: 1.4; padding: 0 0px; }
+        .info-label { font-weight: 500; display: block; margin-bottom: 2px; font-size: 20px; text-align: left; }
+        .info-value { font-weight: 500; display: block; opacity: 0.9; font-size: 13px; text-align: right; }
 
         /* --- COUNTDOWN --- */
         .countdown-card {
@@ -327,8 +362,21 @@
     <div class="app-frame">
         <div class="scroll-content">
             <div id="home" class="gold-header-container">
-                <div class="page-title">Ramadan Timetable</div>
+                
+                <div class="header-top-row">
+                    <div class="page-title">Ramadan Timetable</div>
+                    <div class="header-actions">
+                        <button class="action-btn" id="share-app-btn" title="Share App">
+                            <img src="./Assets/Icons/share.png" alt="Share" class="action-icon-img">
+                        </button>
+                        <button class="action-btn" id="whatsapp-chat-btn" title="Chat on WhatsApp">
+                            <img src="./Assets/Icons/whatsapp.png" alt="WhatsApp" class="action-icon-img">
+                        </button>
+                    </div>
+                </div>
+
                 <div class="title-divider"></div>
+                
                 <div class="date-info-row">
                     <div class="date-left">
                         <span class="info-label">Wednesday</span>
@@ -636,9 +684,9 @@
                              duaContent = `<img src="./Assets/Images/Dua1.png" alt="Dua" class="dua-image">`;
                         }
                     } else {
-                         labelText = "Ramadan Ended";
-                         targetDate = null;
-                         duaContent = `<p style="color:#888;">Eid Mubarak!</p>`;
+                          labelText = "Ramadan Ended";
+                          targetDate = null;
+                          duaContent = `<p style="color:#888;">Eid Mubarak!</p>`;
                     }
                 }
 
@@ -720,6 +768,22 @@
             }
         }
 
+        // --- SPECIFIC SHARE LOGIC ---
+        function shareApp() {
+            const shareData = {
+                title: 'Ramadan Timetable 2026',
+                text: '🌙 *Ramadan Timetable 2026 - Mumbai*\n\nView the complete digital timetable with daily Sehri & Iftar timings, Duas, and more.\n\nClick here to view:',
+                url: window.location.href
+            };
+            if (navigator.share) {
+                navigator.share(shareData).catch((err) => console.log('Error sharing:', err));
+            } else {
+                navigator.clipboard.writeText(window.location.href)
+                    .then(() => alert('Link copied to clipboard!'))
+                    .catch(err => alert('Could not copy link.'));
+            }
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
             lastDateString = getTodayString();
             startCountdown();
@@ -750,13 +814,30 @@
                         }
                     });
                 } else {
-                    // For Popups (About/Contact) just handle visual active state
                     item.addEventListener('click', () => {
                         navItems.forEach(n => n.classList.remove('active'));
                         item.classList.add('active');
                     });
                 }
             });
+
+            // --- BUTTON LISTENERS ---
+            
+            // 1. Share Button (Calls your specific function)
+            const shareBtn = document.getElementById('share-app-btn');
+            if (shareBtn) {
+                shareBtn.addEventListener('click', shareApp);
+            }
+
+            // 2. WhatsApp Button (Direct chat/share)
+            const waBtn = document.getElementById('whatsapp-chat-btn');
+            if (waBtn) {
+                waBtn.addEventListener('click', () => {
+                    const text = "Check out this Ramadan App: " + window.location.href;
+                    const url = `https://wa.me/?text=${encodeURIComponent(text)}`;
+                    window.open(url, '_blank');
+                });
+            }
         });
     </script>
 
