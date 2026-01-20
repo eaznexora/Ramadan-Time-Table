@@ -121,14 +121,14 @@
         .hero-section {
             position: relative;
             background-image: url('./Assets/Images/hero-banner.png');
-            background-size: contain;
+            background-size: cover; 
             background-position: center top;
             background-repeat: no-repeat;
             display: flex;
-            align-items: flex-start; 
+            align-items: center; 
             justify-content: center;
-            padding: 10px 20px 25px; 
-            min-height: 120px;
+            padding: 20px 20px; 
+            min-height: 200px; /* HEIGHT FIXED FOR SLIDER */
             flex-shrink: 0;
             color: white; 
         }
@@ -137,7 +137,7 @@
             content: "";
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(to bottom, var(--app-bg) 0%, transparent 20%);
+            background: linear-gradient(to bottom, var(--app-bg) 0%, transparent 40%);
         }
 
         .quote-container {
@@ -145,17 +145,26 @@
             position: relative;
             z-index: 2;
             padding: 0 30px;
-            margin-top: 4px;
+            min-height: 160px; /* PREVENTS JUMPING */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            transition: opacity 0.3s ease-in-out;
+            opacity: 1;
+        }
+        
+        .quote-container.fade-out {
+            opacity: 0;
         }
 
         .quote-text {
             font-family: 'Playfair Display', serif;
             font-style: italic;
-            font-size: 20px;
-            line-height: 1.4;
-            margin-bottom: 8px; 
+            font-size: 18px;
+            line-height: 1.5;
+            margin-bottom: 10px; 
             font-weight: 500;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
 
         .quote-source {
@@ -168,7 +177,8 @@
 
         .nav-btn {
             position: absolute;
-            top: 40%; 
+            top: 50%;
+            transform: translateY(-50%);
             width: 32px;
             height: 32px;
             background-color: rgba(0, 0, 0, 0.2);
@@ -188,14 +198,14 @@
             color: white;
         }
 
-        .nav-btn.left { left: 15px; }
-        .nav-btn.right { right: 15px; }
+        .nav-btn.left { left: 10px; }
+        .nav-btn.right { right: 10px; }
 
         /* --- TIMER SECTION --- */
         .timer-section {
             background-color: transparent; 
             padding: 10px 15px 10px 15px;
-            margin-top: -10px;
+            margin-top: -30px; 
             position: relative;
             z-index: 10;
         }
@@ -377,7 +387,7 @@
             font-family: Cambria;
         }
 
-        /* --- DUA SECTION --- */
+        /* --- DUA SECTION (UPDATED) --- */
         .dua-section {
             background-color: #F6F8F1;
             padding: 25px 0 30px 0;
@@ -424,19 +434,55 @@
             color: #888;
         }
 
-        .dua-image-holder {
+        .dua-content-box {
             flex-grow: 1;
-            padding: 0 10px;
+            padding: 0 15px;
+            text-align: center;
             display: flex;
+            flex-direction: column;
             justify-content: center;
-            align-items: center;
+            transition: opacity 0.3s ease-in-out;
+            opacity: 1;
+            min-height: 200px; /* Prevents jumping */
         }
 
-        .dua-img-actual {
-            max-width: 100%;
-            height: auto;
-            max-height: 250px;
-            object-fit: contain;
+        .dua-content-box.fade-out {
+            opacity: 0;
+        }
+
+        .dua-arabic {
+            font-family: 'B Yas', 'Arial', sans-serif;
+            font-size: 26px;
+            font-weight: 700;
+            color: #5A3E2b;
+            margin-bottom: 8px;
+            line-height: 1.5;
+            direction: rtl; 
+        }
+
+        .dua-transliteration {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 6px;
+        }
+
+        .dua-translation {
+            font-family: 'Playfair Display', serif;
+            font-size: 16px;
+            color: #222;
+            margin-bottom: 10px;
+            line-height: 1.4;
+            font-weight: 500;
+        }
+
+        .dua-reference {
+            font-family: 'Roboto', sans-serif;
+            font-size: 11px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         /* --- BANNER SECTION --- */
@@ -569,16 +615,16 @@
         </div>
 
         <section class="hero-section">
-            <div class="nav-btn left">
+            <div class="nav-btn left" id="hero-prev">
                 <i class="fas fa-chevron-left"></i>
             </div>
             
-            <div class="quote-container">
-                <div class="quote-text">“When Ramadan begins, the gates of Paradise are opened.”</div>
-                <div class="quote-source">(Sahih al-Bukhari 1899)</div>
+            <div class="quote-container" id="hero-quote-container">
+                <div class="quote-text" id="hero-quote-text">“When Ramadan begins, the gates of Paradise are opened.”</div>
+                <div class="quote-source" id="hero-quote-source">(Sahih al-Bukhari 1899)</div>
             </div>
 
-            <div class="nav-btn right">
+            <div class="nav-btn right" id="hero-next">
                 <i class="fas fa-chevron-right"></i>
             </div>
         </section>
@@ -622,7 +668,7 @@
             </button>
         </section>
 
-          <section class="ad-section">
+        <section class="ad-section">
             <img src="./Assets/Images/ad1.png" alt="Sponsored by Printage" class="ad-banner-img">
         </section>
 
@@ -630,15 +676,18 @@
             <h2 class="dua-title-main">Dua of the day</h2>
             
             <div class="dua-slider-container">
-                <button class="dua-arrow-btn">
+                <button class="dua-arrow-btn" id="dua-prev">
                     <i class="fas fa-chevron-left"></i>
                 </button>
                 
-                <div class="dua-image-holder">
-                    <img src="./Assets/Images/Dua1.png" alt="Dua" class="dua-img-actual">
+                <div class="dua-content-box" id="dua-container">
+                    <div class="dua-arabic" id="dua-arabic">رَّبِّ اغْفِرْ وَارْحَمْ وَأَنتَ خَيْرُ الرَّاحِمِينَ</div>
+                    <div class="dua-transliteration" id="dua-transliteration">(Rabbi'ghfir warham wa anta khayrur-rahimin)</div>
+                    <div class="dua-translation" id="dua-translation">O My Lord, forgive and have mercy, and You are the Best of those who show mercy.</div>
+                    <div class="dua-reference" id="dua-reference">Qur'an – Surah Al-Mu'minun (23:118)</div>
                 </div>
                 
-                <button class="dua-arrow-btn">
+                <button class="dua-arrow-btn" id="dua-next">
                     <i class="fas fa-chevron-right"></i>
                 </button>
             </div>
@@ -846,8 +895,8 @@
                              targetDate = null; 
                         }
                     } else {
-                         labelText = "Ramadan Ended";
-                         targetDate = null;
+                          labelText = "Ramadan Ended";
+                          targetDate = null;
                     }
                 }
 
@@ -885,9 +934,131 @@
             }
         }
 
+        // --- HERO SLIDER LOGIC ---
+        const heroQuotes = [
+            { 
+                text: "“When Ramadan begins, the gates of Paradise are opened.”", 
+                source: "(Sahih al-Bukhari 1899)" 
+            },
+            { 
+                text: "“Fasting is a shield with which a servant protects himself from the Fire.”", 
+                source: "(Musnad Ahmad)" 
+            },
+            { 
+                text: "“O you who have believed, decreed upon you is fasting as it was decreed upon those before you that you may become righteous.”", 
+                source: "(Surah Al-Baqarah 2:183)" 
+            },
+            { 
+                text: "“Whoever fasts Ramadan out of faith and hope for reward, his past sins will be forgiven.”", 
+                source: "(Sahih al-Bukhari 38)" 
+            }
+        ];
+
+        let currentQuoteIndex = 0;
+
+        function setupHeroSlider() {
+            const container = document.getElementById('hero-quote-container');
+            const textEl = document.getElementById('hero-quote-text');
+            const sourceEl = document.getElementById('hero-quote-source');
+            const prevBtn = document.getElementById('hero-prev');
+            const nextBtn = document.getElementById('hero-next');
+
+            if (!container || !textEl || !sourceEl) return;
+
+            function showQuote(index) {
+                container.classList.add('fade-out');
+                setTimeout(() => {
+                    textEl.innerText = heroQuotes[index].text;
+                    sourceEl.innerText = heroQuotes[index].source;
+                    container.classList.remove('fade-out');
+                }, 300);
+            }
+
+            prevBtn.addEventListener('click', () => {
+                currentQuoteIndex--;
+                if (currentQuoteIndex < 0) currentQuoteIndex = heroQuotes.length - 1;
+                showQuote(currentQuoteIndex);
+            });
+
+            nextBtn.addEventListener('click', () => {
+                currentQuoteIndex++;
+                if (currentQuoteIndex >= heroQuotes.length) currentQuoteIndex = 0;
+                showQuote(currentQuoteIndex);
+            });
+            
+            // Auto-slide every 8 seconds
+            setInterval(() => {
+                 currentQuoteIndex++;
+                 if (currentQuoteIndex >= heroQuotes.length) currentQuoteIndex = 0;
+                 showQuote(currentQuoteIndex);
+            }, 8000);
+        }
+
+        // --- DUA SLIDER LOGIC ---
+        const duaList = [
+            {
+                arabic: "رَّبِّ اغْفِرْ وَارْحَمْ وَأَنتَ خَيْرُ الرَّاحِمِينَ",
+                transliteration: "(Rabbi'ghfir warham wa anta khayrur-rahimin)",
+                translation: "O My Lord, forgive and have mercy, and You are the Best of those who show mercy.",
+                ref: "Qur'an – Surah Al-Mu'minun (23:118)"
+            },
+            {
+                arabic: "رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ",
+                transliteration: "(Rabbana atina fid-dunya hasanatan wa fil 'akhirati hasanatan waqina 'adhaban-nar)",
+                translation: "Our Lord! Give us in this world that which is good and in the Hereafter that which is good, and save us from the torment of the Fire.",
+                ref: "Qur'an – Surah Al-Baqarah (2:201)"
+            },
+            {
+                arabic: "اللَّهُمَّ إِنَّكَ عَفُوٌّ تُحِبُّ الْعَفْوَ فَاعْفُ عَنِّي",
+                transliteration: "(Allahumma innaka 'afuwwun tuhibbul-'afwa fa'fu 'anni)",
+                translation: "O Allah, You are Forgiving and love forgiveness, so forgive me.",
+                ref: "Sunan Ibn Majah"
+            }
+        ];
+
+        let currentDuaIndex = 0;
+
+        function setupDuaSlider() {
+            const container = document.getElementById('dua-container');
+            const arabicEl = document.getElementById('dua-arabic');
+            const transEl = document.getElementById('dua-transliteration');
+            const translationEl = document.getElementById('dua-translation');
+            const refEl = document.getElementById('dua-reference');
+            const prevBtn = document.getElementById('dua-prev');
+            const nextBtn = document.getElementById('dua-next');
+
+            if (!container || !arabicEl) return;
+
+            function showDua(index) {
+                container.classList.add('fade-out');
+                setTimeout(() => {
+                    const dua = duaList[index];
+                    arabicEl.innerText = dua.arabic;
+                    transEl.innerText = dua.transliteration;
+                    translationEl.innerText = dua.translation;
+                    refEl.innerText = dua.ref;
+                    container.classList.remove('fade-out');
+                }, 300);
+            }
+
+            prevBtn.addEventListener('click', () => {
+                currentDuaIndex--;
+                if (currentDuaIndex < 0) currentDuaIndex = duaList.length - 1;
+                showDua(currentDuaIndex);
+            });
+
+            nextBtn.addEventListener('click', () => {
+                currentDuaIndex++;
+                if (currentDuaIndex >= duaList.length) currentDuaIndex = 0;
+                showDua(currentDuaIndex);
+            });
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
             startCountdown();
             renderTimetable();
+            setupHeroSlider(); 
+            setupDuaSlider(); // Initialize Dua slider
             const btn = document.getElementById('view-all-btn');
             if (btn) { btn.addEventListener('click', toggleView); }
         });
