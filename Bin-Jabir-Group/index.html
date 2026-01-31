@@ -421,10 +421,10 @@
                         <span class="info-label" id="header-day">---</span>
                         <span class="info-value" id="header-date">---</span>
                     </div>
-                    <div class="date-right">
+                 <!--   <div class="date-right">
                         <span class="info-label" id="header-ramadan-day">---</span>
                         <span class="info-value">1447H</span>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="countdown-card">
                     <div class="icon-container">
@@ -567,23 +567,53 @@
         </div>
     </div>
 
-    <script>
+   <script>
     const DEMO_MODE = false;
-
     const ramadanStartDate = new Date("February 19, 2026");
-    const fullTimetableData = Array.from({ length: 30 }, (_, i) => {
-        const current = new Date(ramadanStartDate);
-        current.setDate(ramadanStartDate.getDate() + i);
-        const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
+    // --- 1. MANUAL DATA ---
+    const manualData = [
+        { roza: 1, date: "Feb 19", day: "Thu", sehri: "05:52 AM", iftar: "06:40 PM" },
+        { roza: 2, date: "Feb 20", day: "Fri", sehri: "05:51 AM", iftar: "06:40 PM" },
+        { roza: 3, date: "Feb 21", day: "Sat", sehri: "05:51 AM", iftar: "06:41 PM" },
+        { roza: 4, date: "Feb 22", day: "Sun", sehri: "05:50 AM", iftar: "06:41 PM" },
+        { roza: 5, date: "Feb 23", day: "Mon", sehri: "05:49 AM", iftar: "06:41 PM" },
+        { roza: 6, date: "Feb 24", day: "Tue", sehri: "05:49 AM", iftar: "06:42 PM" },
+        { roza: 7, date: "Feb 25", day: "Wed", sehri: "05:48 AM", iftar: "06:42 PM" },
+        { roza: 8, date: "Feb 26", day: "Thu", sehri: "05:48 AM", iftar: "06:42 PM" },
+        { roza: 9, date: "Feb 27", day: "Fri", sehri: "05:47 AM", iftar: "06:43 PM" },
+        { roza: 10, date: "Feb 28", day: "Sat", sehri: "05:46 AM", iftar: "06:43 PM" },
+        { roza: 11, date: "Mar 01", day: "Sun", sehri: "05:46 AM", iftar: "06:44 PM" },
+        { roza: 12, date: "Mar 02", day: "Mon", sehri: "05:45 AM", iftar: "06:44 PM" },
+        { roza: 13, date: "Mar 03", day: "Tue", sehri: "05:44 AM", iftar: "06:44 PM" },
+        { roza: 14, date: "Mar 04", day: "Wed", sehri: "05:44 AM", iftar: "06:45 PM" },
+        { roza: 15, date: "Mar 05", day: "Thu", sehri: "05:43 AM", iftar: "06:45 PM" },
+        { roza: 16, date: "Mar 06", day: "Fri", sehri: "05:42 AM", iftar: "06:45 PM" },
+        { roza: 17, date: "Mar 07", day: "Sat", sehri: "05:41 AM", iftar: "06:46 PM" },
+        { roza: 18, date: "Mar 08", day: "Sun", sehri: "05:41 AM", iftar: "06:46 PM" },
+        { roza: 19, date: "Mar 09", day: "Mon", sehri: "05:40 AM", iftar: "06:46 PM" },
+        { roza: 20, date: "Mar 10", day: "Tue", sehri: "05:39 AM", iftar: "06:46 PM" },
+        { roza: 21, date: "Mar 11", day: "Wed", sehri: "05:38 AM", iftar: "06:47 PM" },
+        { roza: 22, date: "Mar 12", day: "Thu", sehri: "05:38 AM", iftar: "06:47 PM" },
+        { roza: 23, date: "Mar 13", day: "Fri", sehri: "05:37 AM", iftar: "06:47 PM" },
+        { roza: 24, date: "Mar 14", day: "Sat", sehri: "05:36 AM", iftar: "06:48 PM" },
+        { roza: 25, date: "Mar 15", day: "Sun", sehri: "05:35 AM", iftar: "06:48 PM" },
+        { roza: 26, date: "Mar 16", day: "Mon", sehri: "05:34 AM", iftar: "06:48 PM" },
+        { roza: 27, date: "Mar 17", day: "Tue", sehri: "05:33 AM", iftar: "06:48 PM" },
+        { roza: 28, date: "Mar 18", day: "Wed", sehri: "05:33 AM", iftar: "06:49 PM" },
+        { roza: 29, date: "Mar 19", day: "Thu", sehri: "05:32 AM", iftar: "06:49 PM" },
+        { roza: 30, date: "Mar 20", day: "Fri", sehri: "05:31 AM", iftar: "06:49 PM" },
+    ];
+
+    // --- 2. ADAPTER ---
+    const fullTimetableData = manualData.map(item => {
+        const currentYear = 2026;
+        const dateObj = new Date(`${item.date}, ${currentYear}`);
         return {
-            roza: i + 1,
-            date: `${monthNames[current.getMonth()]} ${String(current.getDate()).padStart(2, '0')}`,
-            day: current.getDay(),
-            fullDate: `${current.toLocaleDateString('en-US', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}`,
-            sehri: "05:51 AM",
-            iftar: "06:40 PM",
-            rawDate: current
+            ...item,
+            day: dateObj.getDay(), 
+            rawDate: dateObj,
+            fullDate: dateObj.toLocaleDateString('en-US', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })
         };
     });
 
@@ -591,7 +621,7 @@
     const INITIAL_COUNT = 3;
     let lastDateString = "";
     let currentSlide = 0;
-    let sliderInterval; 
+    let sliderInterval;
 
     function getCurrentDate() {
         if (DEMO_MODE) return new Date("2026-02-19T10:00:00");
@@ -651,32 +681,11 @@
     `;
     }
 
+    // --- UPDATED: Hijri Date Logic Removed ---
     function updateHeaderDate() {
         const now = getCurrentDate();
-        const todayStr = getTodayString();
-        const todayData = fullTimetableData.find(d => d.date.toLowerCase() === todayStr.toLowerCase());
-
         document.getElementById('header-day').innerText = now.toLocaleDateString('en-US', { weekday: 'long' });
         document.getElementById('header-date').innerText = now.toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' });
-
-        if (todayData) {
-            document.getElementById('header-ramadan-day').innerText = `${todayData.roza}${getOrdinal(todayData.roza)} Ramadan`;
-        } else {
-            try {
-                const hijriDate = new Intl.DateTimeFormat('en-u-ca-islamic-nu-latn', {
-                    day: 'numeric',
-                    month: 'long'
-                }).format(now);
-                document.getElementById('header-ramadan-day').innerText = hijriDate;
-            } catch (e) {
-                document.getElementById('header-ramadan-day').innerText = "Pre-Ramadan";
-            }
-        }
-    }
-
-    function getOrdinal(n) {
-        let s = ["th", "st", "nd", "rd"], v = n % 100;
-        return (s[(v - 20) % 10] || s[v] || s[0]);
     }
 
     function renderTimetable() {
@@ -857,8 +866,7 @@
 
         document.getElementById('view-all-btn')?.addEventListener('click', toggleView);
         document.getElementById('share-app-btn')?.addEventListener('click', shareApp);
-        
-        // --- YOUR CUSTOM WHATSAPP LOGIC IS NOW HERE ---
+
         document.getElementById('whatsapp-chat-btn')?.addEventListener('click', () => {
             const message = `🌙 Ramadan Timetable 2026 - Mumbai\nView daily Sehri & Iftar timings:\n${window.location.href}`;
             const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
@@ -881,4 +889,4 @@
     });
 </script>
 </body>
-</html>
+</html>s
