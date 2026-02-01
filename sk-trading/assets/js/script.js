@@ -330,27 +330,132 @@ function closeModals() {
     document.body.style.overflow = ''; 
 }
 
-// --- DUA SLIDESHOW ---
+// --- DUA SLIDESHOW (COMPLETE & FINAL) ---
 const duaData = [
+
+    // --- Forgiveness & Laylatul Qadr ---
     {
-        arabic: "اللَّهُمَّ إِنَّكَ عَفُوٌّ تُحِبُّ الْعَفْوَ فَاعْفُ عَنِّي",
-        transliteration: "Allahumma innaka 'afuwwun tuhibbul-'afwa fa'fu 'anni",
+        arabic: "اللَّهُمَّ إِنَّكَ عَفُوٌّ تُحِبُّ الْعَفْوَ فَاعْفُ عَنِّي",
+        transliteration: "Allahumma innaka ‘afuwwun tuḥibbul-‘afwa fa‘fu ‘annī",
         translation: "O Allah, You are Forgiving and love forgiveness, so forgive me.",
         reference: "(Tirmidhi)"
     },
+
+    // --- Dunya & Akhirah ---
     {
-        arabic: "رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ",
-        transliteration: "Rabbana atina fid-dunya hasanatan wa fil 'akhirati hasanatan waqina 'adhaban-nar",
-        translation: "Our Lord! Give us in this world that which is good and in the Hereafter that which is good, and save us from the torment of the Fire!",
+        arabic: "رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ",
+        transliteration: "Rabbana ātinā fid-dunyā ḥasanatan wa fil-ākhirati ḥasanatan waqinā ‘adhāban-nār",
+        translation: "Our Lord, grant us good in this world and good in the Hereafter, and protect us from the punishment of the Fire.",
         reference: "(Qur'an 2:201)"
     },
+
+    // --- Imaan & Steadfastness ---
     {
-        arabic: "یَا مُقَلِّبَ الْقُلُوبِ ثَبِّتْ قَلْبِی عَلٰی دِینِكَ",
-        transliteration: "Ya Muqallibal-qulubi thabbit qalbi 'ala dinika",
-        translation: "O Controller of the hearts, make my heart steadfast in Your religion.",
+        arabic: "اللَّهُمَّ يَا مُقَلِّبَ الْقُلُوبِ ثَبِّتْ قَلْبِي عَلَى دِينِكَ",
+        transliteration: "Allāhumma yā muqallibal-qulūb thabbit qalbī ‘alā dīnik",
+        translation: "O Turner of the hearts, keep my heart firm upon Your religion.",
         reference: "(Tirmidhi)"
+    },
+
+    // --- Iftar Dua ---
+    {
+        arabic: "ذَهَبَ الظَّمَأُ وَابْتَلَّتِ الْعُرُوقُ وَثَبَتَ الأَجْرُ إِنْ شَاءَ اللَّهُ",
+        transliteration: "Dhahabaẓ-ẓama’u wabtallatil-‘urūq wa thabatal-ajru in shā’Allāh",
+        translation: "The thirst has gone, the veins are moistened, and the reward is confirmed, if Allah wills.",
+        reference: "(Abu Dawood)"
+    },
+
+    // --- Before Iftar ---
+    {
+        arabic: "اللَّهُمَّ إِنِّي لَكَ صُمْتُ وَبِكَ آمَنْتُ وَعَلَيْكَ تَوَكَّلْتُ وَعَلَى رِزْقِكَ أَفْطَرْتُ",
+        transliteration: "Allahumma innī laka ṣumtu wa bika āmantu wa ‘alayka tawakkaltu wa ‘alā rizqika aftartu",
+        translation: "O Allah, I fasted for You, believed in You, relied upon You, and broke my fast with Your provision.",
+        reference: "(Abu Dawood)"
+    },
+
+    // --- Acceptance of Worship ---
+    {
+        arabic: "اللَّهُمَّ تَقَبَّلْ مِنَّا الصِّيَامَ وَالْقِيَامَ",
+        transliteration: "Allahumma taqabbal minnā aṣ-ṣiyāma wal-qiyām",
+        translation: "O Allah, accept from us our fasting and prayers.",
+        reference: "(Common Dua)"
+    },
+
+    // --- Protection from Hellfire ---
+    {
+        arabic: "اللَّهُمَّ أَجِرْنَا مِنَ النَّارِ",
+        transliteration: "Allahumma ajirnā minan-nār",
+        translation: "O Allah, protect us from the Fire.",
+        reference: "(Common Dua)"
+    },
+
+    // --- Parents Forgiveness ---
+    {
+        arabic: "رَبِّ اغْفِرْ لِي وَلِوَالِدَيَّ",
+        transliteration: "Rabbighfir lī wa liwālidayya",
+        translation: "My Lord, forgive me and my parents.",
+        reference: "(Qur'an)"
+    },
+
+    // --- Parents Mercy ---
+    {
+        arabic: "رَبِّ ارْحَمْهُمَا كَمَا رَبَّيَانِي صَغِيرًا",
+        transliteration: "Rabbi-rḥamhumā kamā rabbayānī ṣaghīrā",
+        translation: "My Lord, have mercy upon them as they brought me up when I was small.",
+        reference: "(Qur'an 17:24)"
+    },
+
+    // --- Zikr, Shukr & Ibadah ---
+    {
+        arabic: "اللَّهُمَّ أَعِنِّي عَلَى ذِكْرِكَ وَشُكْرِكَ وَحُسْنِ عِبَادَتِكَ",
+        transliteration: "Allāhumma a‘innī ‘alā dhikrika wa shukrika wa ḥusni ‘ibādatik",
+        translation: "O Allah, help me to remember You, thank You, and worship You in the best manner.",
+        reference: "(Abu Dawood)"
+    },
+
+    // --- I‘tikaf Intention ---
+    {
+        arabic: "نَوَيْتُ سُنَّةَ الْاِعْتِكَافِ مَا دُمْتُ فِي هٰذِهِ الْمَسْجِدِ",
+        transliteration: "Nawaytu sunnatal-i‘tikāfi mā dumtu fī hādhihil-masjid",
+        translation: "I intend to observe the Sunnah of I‘tikaf for as long as I remain in this mosque.",
+        reference: "(I‘tikaf Niyyah)"
+    },
+
+    // --- Taraweeh Dua (Slide 1) ---
+    {
+        arabic: `سُبْحَانَ ذِي الْمُلْكِ وَالْمَلَكُوتِ
+سُبْحَانَ ذِي الْعِزَّةِ وَالْعَظَمَةِ وَالْهَيْبَةِ وَالْقُدْرَةِ وَالْكِبْرِيَاءِ وَالْجَبَرُوتِ`,
+        transliteration: `Subḥāna dhil-mulki wal-malakūt
+Subḥāna dhil-‘izzati wal-‘aẓamati wal-haybati wal-qudrati wal-kibriyā’i wal-jabarūt`,
+        translation: "Glory be to the Owner of sovereignty and dominion. Glory be to the Possessor of honor, greatness, awe, power, majesty, and might.",
+        reference: "(Taraweeh Tasbeeh)"
+    },
+
+    // --- Taraweeh Dua (Slide 2) ---
+    {
+        arabic: `سُبْحَانَ الْمَلِكِ الْحَيِّ الَّذِي لَا يَنَامُ وَلَا يَمُوتُ
+سُبُّوحٌ قُدُّوسٌ رَبُّنَا وَرَبُّ الْمَلَائِكَةِ وَالرُّوحِ`,
+        transliteration: `Subḥānal-malikil-ḥayyilladhī lā yanāmu wa lā yamūt
+Subbūḥun quddūs, rabbunā wa rabbul-malā’ikati war-rūḥ`,
+        translation: "Glory be to the Ever-Living King who neither sleeps nor dies. Perfectly Pure and Holy is our Lord.",
+        reference: "(Taraweeh Tasbeeh)"
+    },
+
+    // --- Taraweeh Dua (Slide 3) ---
+    {
+        arabic: `اللَّهُمَّ أَجِرْنَا مِنَ النَّارِ
+يَا مُجِيرُ يَا مُجِيرُ يَا مُجِيرُ
+
+بِرَحْمَتِكَ يَا أَرْحَمَ الرَّاحِمِينَ`,
+        transliteration: `Allāhumma ajirnā minan-nār
+Yā mujīr, yā mujīr, yā mujīr
+
+Bi-raḥmatika yā arḥamar-rāḥimīn`,
+        translation: "O Allah, protect us from the Fire. By Your mercy, O Most Merciful of those who show mercy.",
+        reference: "(Taraweeh Tasbeeh)"
     }
 ];
+
 
 let currentDuaIndex = 0;
 const duaIntervalTime = 5000; 
