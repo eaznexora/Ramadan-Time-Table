@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "https://eaznexora.github.io/Ramadan-Time-Table/$1"
+    }
+  ]
+}
