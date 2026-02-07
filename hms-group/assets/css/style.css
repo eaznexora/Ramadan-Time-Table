@@ -110,3 +110,17 @@ button:active, a.block:active {
 .pb-safe {
     padding-bottom: env(safe-area-inset-bottom);
 }
+
+/* Custom Scrollbar for the Dua Modal */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #c3f0d0;
+    border-radius: 10px;
+}
+
+/* Ensure the 30-day list keeps its line breaks */
+#m-trans {
+    white-space: pre-line;
+}
