@@ -541,3 +541,84 @@ document.addEventListener('DOMContentLoaded', () => {
     initScrollAnimations(); 
 });
 
+// --- DATA: MORE DUAS STORE ---
+const duaDataStore = {
+    "Taraweeh": {
+        arabic: "سُبْحَانَ ذِي الْمُلْكِ وَالْمَلَكُوتِ، سُبْحَانَ ذِي الْعِزَّةِ وَالْعَظَمَةِ وَالْهَيْبَةِ وَالْقُدْرَةِ وَالْكِبْرِيَاءِ وَالْجَبَرُوتِ، سُبْحَانَ الْمَلِكِ الْحَيِّ الَّذِي لَا يَنَامُ وَلَا يَمُوتُ، سُبُّوحٌ قُدُّوسٌ رَبُّنَا وَرَبُّ الْمَلَائِكَةِ وَالرُّوحِ، اللَّهُمَّ أَجِرْنَا مِنَ النَّارِ يَا مُجِيرُ يَا مُجِيرُ يَا مُجِيرُ",
+        trans: "Subhana dhil-mulki wal-malakut, Subhana dhil-izzati wal-azamati wal-haibati wal-qudrati wal-kibriya'i wal-jabarut. Subhanal-malikil-hayyil-ladhi la yanamu wa la yamut. Subbuhun quddusun rabbuna wa rabbul-mala'ikati war-ruh. Allahumma ajirna minan-nar, ya mujiru, ya mujiru, ya mujiru.",
+        eng: "Glory be to the Owner of the Kingdom and the Dominion. Glory be to the Possessor of Honor, Greatness, Awe, Power, Pride, and Might. Glory be to the Sovereign who is Alive, who neither sleeps nor dies. He is the Utterly Pure, the Holy, our Lord and the Lord of the Angels and the Soul. O Allah, protect us from the Fire, O Protector, O Protector, O Protector."
+    },
+    "Lailatul Qadr": {
+        arabic: "اللَّهُمَّ إِنَّكَ عَفُوٌّ تُحِبُّ الْعَفْوَ فَاعْفُ عَنِّي",
+        trans: "Allahumma innaka 'afuwwun tuhibbul-'afwa fa'fu 'anni",
+        eng: "O Allah, You are Forgiving and love forgiveness, so forgive me."
+    },
+    "Istighfar": {
+        arabic: "أَسْتَغْفِرُ اللَّهَ الْعَظِيمَ الَّذِي لاَ إِلَهَ إِلاَّ هُوَ الْحَيُّ الْقَيُّومُ وَأَتُوبُ إِلَيْهِ",
+        trans: "Astaghfirullah al-azim alladhi la ilaha illa huwal-hayyul-qayyum wa atubu ilayh",
+        eng: "I seek forgiveness from Allah, the Almighty, besides whom there is no God, the Living, the Sustainer, and I turn to Him in repentance."
+    },
+    "Rahmah": {
+        arabic: "رَبَّنَا آتِنَا مِن لَّدُنكَ رَحْمَةً وَهَيِّئْ لَنَا مِنْ أَمْرِنَا رَشَدًا",
+        trans: "Rabbana atina min ladunka rahmatan wa hayyi' lana min amrina rashada",
+        eng: "Our Lord, grant us from Yourself mercy and prepare for us from our affair right guidance."
+    },
+    "Hidayah": {
+        arabic: "اللَّهُمَّ اهْدِنِي فِيمَنْ هَدَيْتَ، وَعَافِنِي فِيمَنْ عَافَيْتَ، وَتَوَلَّنِي فِيمَنْ تَوَلَّيْتَ",
+        trans: "Allahummah-dini fiman hadayt, wa 'afini fiman 'afayt, wa tawallani fiman tawallayt",
+        eng: "O Allah, guide me among those whom You have guided, grant me health among those whom You have granted health, and take me into Your care among those whom You have taken into Your care."
+    },
+    "Shukr": {
+        arabic: "رَبِّ أَوْزِعْنِي أَنْ أَشْكُرَ نِعْمَتَكَ الَّتِي أَنْعَمْتَ عَلَيَّ وَعَلَىٰ وَالِدَيَّ وَأَنْ أَعْمَلَ صَالِحًا تَرْضَاهُ",
+        trans: "Rabbi awzi'ni an ashkura ni'matakal-lati an'amta 'alayya wa 'ala walidayya wa an a'mala salihan tardhahu",
+        eng: "My Lord, enable me to be grateful for Your favor which You have bestowed upon me and upon my parents and to do righteousness of which You approve."
+    },
+    "Daily 30 Duas": {
+    arabic: "30 دعائیں",
+    trans: `1: Ae Allah! Is roze mein mujhe apni raza ka rasta dikha de.
+2: Ae Allah! Mujhe nekion ke qareeb aur gunahon se door kar de.
+3: Ae Allah! Mujhe samajh, sabr aur ilm ata farma.
+4: Ae Allah! Meri rozi mein barkat aur dil mein sukoon de.
+5: Ae Allah! Meri ibadat qubool farma aur meri kamiyan maaf kar.
+6: Ae Allah! Mujhe apni rehmat ke saaye mein rakh.
+7: Ae Allah! Mujhe jahannam ki aag se bacha aur jannat naseeb kar.
+8: Ae Allah! Mere dil ko saaf aur niyat ko nek bana.
+9: Ae Allah! Mujhe nek logon ki sangat ata kar.
+10: Ae Allah! Mere pichhle saare gunah maaf farma.
+11: Ae Allah! Mujhe halal rozi aur paak zindagi ata kar.
+12: Ae Allah! Mujhe zaalim na bana aur mazloomon ka sahara bana.
+13: Ae Allah! Meri zabaan ko sach aur dil ko aman de.
+14: Ae Allah! Mere maa-baap par apni rehmat nazil farma.
+15: Ae Allah! Mujhe apne nek bandon mein shamil farma.
+16: Ae Allah! Meri duaon ko qubool farma.
+17: Ae Allah! Mujhe Quran samajhne aur us par amal karne ki taufiq de.
+18: Ae Allah! Mere dil se dar, gussa aur hasad nikaal de.
+19: Ae Allah! Meri aakhirat aasaan farma.
+20: Ae Allah! Mujhe apni qareebi ata kar.
+21: Ae Allah! Mujhe Lailatul Qadr ki barkat naseeb farma.
+22: Ae Allah! Mere ghar mein sukoon aur mohabbat bhar de.
+23: Ae Allah! Mujhe apni rehmat se kabhi mehroom na kar.
+24: Ae Allah! Meri har pareshani aasaan farma.
+25: Ae Allah! Mujhe nek aakhirat aur Jannatul Firdaus ata kar.
+26: Ae Allah! Mere marhoomeen ki maghfirat farma.
+27: Ae Allah! Is muqaddas raat mein meri saari duaen qubool kar.
+28: Ae Allah! Meri zindagi ko apni ita’at mein guzarne ki taufiq de.
+29: Ae Allah! Ramzan ki barkatein hamare saath hamesha rakh.
+30: Ae Allah! Hamara roza, qiyam aur ibadat qubool farma. Aameen.`,
+            eng: "Daily 30 Prayers for the Ramadan"
+    }
+};
+
+// --- FUNCTION: OPEN DUA MODAL ---
+function openDuaModal(key) {
+    const data = duaDataStore[key];
+    if (!data) return;
+
+    document.getElementById('m-title').innerText = key;
+    document.getElementById('m-arabic').innerText = data.arabic;
+    document.getElementById('m-trans').innerText = data.trans;
+    document.getElementById('m-eng').innerText = data.eng;
+
+    // Use your existing openModal function
+    openModal('modal-dua');
+}
