@@ -1,0 +1,49 @@
+/* Slider & Animations */
+#banner-slider {
+    width: 200%;
+    display: flex;
+    transition: transform 0.7s ease-in-out;
+}
+#banner-slider img {
+    width: 50%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.dua-content, #full-timetable, #city-menu, [id^="dua"] {
+    transition: max-height 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Tabs */
+.tab-btn {
+    width: 100px;
+    height: 35px;
+    background: #CEA571;
+    border-radius: 5px 5px 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: black;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+/* Timer */
+.timer-box {
+    width: 64px;
+    height: 57px;
+    background: rgba(45, 86, 67, 0.4);
+    box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.timer-box span { font-size: 30px; font-weight: bold; color: white; line-height: 1; }
+.timer-box small { font-size: 13px; color: rgba(255,255,255,0.8); }
+
+/* Utilities */
+.arabic-text { font-family: 'Amiri', serif; direction: rtl; line-height: 2 !important; color: #ffffff; }
+.invert { filter: brightness(0) invert(1); }
+.inner-shadow { box-shadow: 0px 4px 4px rgba(0,0,0,0.25), inset 0px 0px 4px rgba(0,0,0,0.15) !important; }

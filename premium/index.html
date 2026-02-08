@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script>
+        if (!window.location.pathname.endsWith('/') && !window.location.pathname.endsWith('.html')) {
+            var newUrl = window.location.href + "/";
+            window.history.replaceState(null, '', newUrl);
+        }
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ramadan Timetable 2026 | 1447H</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Amiri&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="assets/js/tailwind-config.js"></script>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="bg-[#1a1a1a] min-h-screen flex justify-center items-start font-poppins text-white">
+
+    <div class="w-full max-w-[430px] bg-[#224233] min-h-screen shadow-2xl flex flex-col relative overflow-hidden">
+        
+        <header class="bg-[#113B27] h-[46px] px-4 flex justify-between items-center sticky top-0 z-[100]">
+            <h1 class="font-serif text-[20px]">Ramadan Timetable 2026 | 1447H</h1>
+            <button onclick="shareApp()" class="w-6 h-6 flex items-center justify-center transition-transform active:scale-90">
+                <img src="assets/icons/share.svg" alt="Share" class="w-full h-full brightness-0 invert">
+            </button>
+        </header>
+
+        <main class="flex flex-col">
+            <section class="relative w-full h-[128px] overflow-hidden">
+                <div id="banner-slider" class="flex transition-transform duration-700 h-full">
+                    <img src="assets/Banners/first.png" class="w-full h-full object-cover flex-shrink-0" alt="Banner 1">
+                    <img src="assets/Banners/last.png" class="w-full h-full object-cover flex-shrink-0" alt="Banner 2">
+                </div>
+            </section>
+
+            <section class="px-4 pt-6 pb-2 bg-[#224233]">
+                <div class="flex justify-between items-center border-b border-white/40 pb-2">
+                    <h2 id="current-city" class="font-serif text-[18px]">Mumbai, Maharashtra (India)</h2>
+                    <button onclick="toggleCityMenu()" class="bg-[#2D5643] px-3 py-1 rounded-[5px] text-[14px] font-serif border border-white/10 hover:bg-[#1a3529]">Change Location</button>
+                </div>
+                <div id="city-menu" class="max-h-0 overflow-hidden bg-[#113B27]/95 shadow-xl transition-all duration-500">
+                    <div class="grid grid-cols-2 gap-2 p-4">
+                        <button onclick="updateCity('Mumbai')" class="py-2 border border-white/10 rounded text-sm hover:bg-[#2D5643]">Mumbai</button>
+                        <button onclick="updateCity('Pune')" class="py-2 border border-white/10 rounded text-sm hover:bg-[#2D5643]">Pune</button>
+                        <button onclick="updateCity('Nagpur')" class="py-2 border border-white/10 rounded text-sm hover:bg-[#2D5643]">Nagpur</button>
+                        <button onclick="updateCity('Ratnagiri')" class="py-2 border border-white/10 rounded text-sm hover:bg-[#2D5643]">Ratnagiri</button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="px-4 text-center py-4 bg-[#224233]">
+                <p id="timer-label" class="text-[18px] mb-4">Ramadan Begins In</p>
+                <div class="flex justify-center gap-[9px]">
+                    <div class="timer-box"><span id="cd-days">00</span><small>Days</small></div>
+                    <div class="timer-box"><span id="cd-hours">00</span><small>Hours</small></div>
+                    <div class="timer-box"><span id="cd-minutes">00</span><small>Mins</small></div>
+                    <div class="timer-box"><span id="cd-seconds">00</span><small>Sec</small></div>
+                </div>
+                <p class="text-[14px] mt-4 opacity-80">Prepare your heart and time for Ramadan</p>
+            </section>
+
+            <section class="px-4 py-4 space-y-2 pb-32 bg-[#224233]">
+                <div class="dua-wrapper bg-[#2D5643] rounded-[5px] overflow-hidden">
+                    <button onclick="toggleDua('dua1')" class="w-full h-[44px] flex items-center justify-center text-white">First Ashrah Dua</button>
+                    <div id="dua1" class="max-h-0 overflow-hidden bg-[#2D5643] transition-all duration-500">
+                        <div class="p-4 text-center border-t border-white/20">
+                            <div class="w-full h-[1px] bg-white/30 mb-4"></div>
+                            <p class="arabic-text text-[26px]">رَبِّ اغْفِرْ وَارْحَمْ وَأَنْتَ خَيْرُ الرَّاحِمِينَ</p>
+                            <p class="text-[15px] italic mt-3">Rabbighfir warham wa anta khayrur raahimeen</p>
+                            <p class="text-[14px] mt-1 text-white/90">O Lord, forgive me, have mercy on me, and You are the Best of the Merciful.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="dua-wrapper bg-[#2D5643] rounded-[5px] overflow-hidden">
+                    <button onclick="toggleDua('dua2')" class="w-full h-[44px] flex items-center justify-center text-white">Second Ashrah Dua</button>
+                    <div id="dua2" class="max-h-0 overflow-hidden bg-[#2D5643] transition-all duration-500">
+                        <div class="p-4 text-center border-t border-white/20">
+                            <p class="arabic-text text-[26px]">اَسْتَغْفِرُ اللہَ رَبِّی مِنْ کُلِّ زَنْبٍ وَّ اَتُوْبُ اِلَیْہِ</p>
+                            <p class="text-[15px] italic mt-3">Astagfirullaha rab-bi min kulli zambiyon wa-atoobuilaiyh</p>
+                            <p class="text-[14px] mt-1 text-white/90">I seek forgiveness from Allah for all my sins and turn to Him.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="dua-wrapper bg-[#2D5643] rounded-[5px] overflow-hidden">
+                    <button onclick="toggleDua('dua3')" class="w-full h-[44px] flex items-center justify-center text-white">Third Ashrah Dua</button>
+                    <div id="dua3" class="max-h-0 overflow-hidden bg-[#2D5643] transition-all duration-500">
+                        <div class="p-4 text-center border-t border-white/20">
+                            <p class="arabic-text text-[26px]">اَللّٰھُمَّ اَجِرْنِیْ مِنَ النَّارِ</p>
+                            <p class="text-[15px] italic mt-3">Allahumma Ajirni minan naar</p>
+                            <p class="text-[14px] mt-1 text-white/90">O Allah, save me from the fire (Jahannam).</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="bg-[#F6F3E4] px-4 pb-24 text-black relative">
+                
+                <div class="-mt-[86px] relative z-20 mb-6">
+                    <div class="flex justify-between w-full px-1 mb-[-1px]">
+                        <div id="tab-today" class="tab-btn hidden">Today</div>
+                        <div id="tab-roza" class="tab-btn ml-auto">Roza 1</div>
+                    </div>
+                    
+                    <div class="w-full h-[103px] bg-[#FAF8EC] border-2 border-[#CEA571] rounded-[10px] shadow-lg flex flex-col p-3 inner-shadow">
+                        <div id="main-card-date" class="text-[13px] text-black text-left pl-1 border-b border-black/10 pb-1 mb-2">Thursday, 19th February 2026</div>
+                        
+                        <div class="flex items-center justify-around flex-1 text-black relative">
+                            <div class="text-center w-1/2">
+                                <p class="text-[12px] opacity-60">Sehri Ends</p>
+                                <p id="main-sehri" class="text-[20px] font-bold">05:49 AM</p>
+                            </div>
+                            <div class="h-[40px] w-[1px] bg-black/10"></div>
+                            <div class="text-center w-1/2">
+                                <p class="text-[12px] opacity-60">Iftar Time</p>
+                                <p id="main-iftar" class="text-[20px] font-bold">06:15 PM</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="next-days-container" class="grid grid-cols-3 gap-2"></div>
+
+                <div id="full-timetable" class="max-h-0 overflow-hidden transition-all duration-700 mt-2">
+                    <div id="full-grid" class="grid grid-cols-3 gap-2 pt-2"></div>
+                </div>
+
+                <button id="view-all-btn" onclick="toggleFullTable()" class="w-full h-[35px] bg-[#FAF8EC] border border-[#CEA571] rounded-[17.5px] mt-6 text-[15px] shadow-sm hover:bg-white transition-all">View Complete Timetable</button>
+            
+            </section>
+        </main>
+    </div>
+    <script src="assets/js/script.js"></script>
+</body>
+</html>
