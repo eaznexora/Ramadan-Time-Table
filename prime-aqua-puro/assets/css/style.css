@@ -127,7 +127,8 @@ button:active, a.block:active {
 
 @font-face {
   font-family: 'BlippoBlack';
-  src: url('/assets/fonts/BlippoBlack.ttf') format('truetype');
+  src: url('../fonts/BlippoBlack.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
+
