@@ -1,0 +1,133 @@
+/* ================= GLOBAL STYLES ================= */
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* ================= ANIMATIONS ================= */
+@keyframes fadeInPage {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.fade-in-page {
+    animation: fadeInPage 0.8s ease-out forwards;
+}
+
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+    animation: fadeInUp 0.4s ease-out forwards;
+}
+
+/* ================= PREMIUM HOVER EFFECTS ================= */
+.glass-card, section .bg-white, .rounded-2xl {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+section:hover .glass-card, 
+section:hover .bg-white.shadow-md {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+}
+
+button, a.block {
+    transition: all 0.3s ease;
+}
+
+button:active, a.block:active {
+    transform: scale(0.96);
+}
+
+.bg-brand-600:hover {
+    box-shadow: 0 0 15px rgba(16, 185, 129, 0.4);
+    transform: translateY(-1px);
+}
+
+.nav-btn svg {
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.nav-btn:hover svg {
+    transform: translateY(-3px) scale(1.1);
+    color: #059669;
+}
+
+/* ================= UTILITIES ================= */
+::-webkit-scrollbar {
+    width: 6px;
+}
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+    background: #10b981;
+    border-radius: 10px;
+}
+
+/* --- ARABIC FONT STYLE (FIXED HUGE GAP) --- */
+.arabic-text {
+    font-family: 'Amiri', 'Scheherazade New', serif;
+    /* Massive line height to stop overlapping */
+    line-height: 2 !important; 
+    direction: rtl;
+    padding: 10px 0;
+    display: block;
+}
+
+.loader {
+    border: 3px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 3px solid #10b981;
+    width: 24px;
+    height: 24px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.pb-safe {
+    padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* Custom Scrollbar for the Dua Modal */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #c3f0d0;
+    border-radius: 10px;
+}
+
+/* Ensure the 30-day list keeps its line breaks */
+#m-trans {
+    white-space: pre-line;
+}
+
+@font-face {
+  font-family: 'BlippoBlack';
+  src: url('/assets/fonts/BlippoBlack.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
