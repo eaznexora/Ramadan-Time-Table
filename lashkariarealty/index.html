@@ -88,7 +88,7 @@
             display: flex; 
             align-items: center; 
             gap: 6px; 
-            cursor: pointer; /* Make it look clickable */
+            cursor: pointer; 
             transition: background-color 0.2s;
             position: relative;
             z-index: 102;
@@ -103,17 +103,17 @@
         /* --- NEW LOCATION DROPDOWN MENU --- */
         .location-dropdown {
             position: absolute;
-            top: 50px; /* Adjusted position below the pill */
+            top: 50px; 
             left: 15px;
             z-index: 101;
-            background-color: #064e46; /* Slightly darker green for contrast */
+            background-color: #064e46; 
             border-radius: 12px;
             padding: 15px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            display: none; /* Hidden by default */
-            grid-template-columns: 1fr 1fr; /* Grid layout like image */
+            display: none; 
+            grid-template-columns: 1fr 1fr; 
             gap: 10px;
-            width: calc(100% - 30px); /* Full width minus padding */
+            width: calc(100% - 30px); 
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
@@ -232,17 +232,13 @@
         .contact-icons-container { display: flex; justify-content: center; gap: 25px; margin-bottom: 15px; }
         .icon-btn { color: #0D4A3F; font-size: 24px; transition: transform 0.2s; text-decoration: none; display: inline-block; }
         
-        /* THE FIX: STRAIGHT CALL ICON */
         .fa-phone-alt { transform: rotate(90deg) !important; } 
         
         .icon-btn:hover { transform: scale(1.15); }
         .contact-helper-text { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: #666; font-weight: 500; }
 
-/* --- MORE DUAS SECTION --- */
-        .more-duas-section {
-            padding: 0 15px 20px 15px;
-        }
-        
+        /* --- MORE DUAS SECTION --- */
+        .more-duas-section { padding: 0 15px 20px 15px; }
         .more-duas-card {
             background-color: #ffffff;
             border-radius: 16px;
@@ -250,7 +246,6 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
             border: 1px solid #eee;
         }
-
         .section-heading-sm {
             font-family: 'Roboto', sans-serif;
             font-size: 12px;
@@ -261,15 +256,9 @@
             text-align: center;
             margin-bottom: 15px;
         }
-
-        .dua-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-        }
-
+        .dua-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
         .dua-grid-btn {
-            background-color: #F2F9F8; /* Light mint to match theme */
+            background-color: #F2F9F8; 
             color: #043b35;
             border: 1px solid #B6CCC5;
             padding: 12px 5px;
@@ -280,17 +269,13 @@
             transition: all 0.2s;
             font-family: 'Roboto', sans-serif;
         }
-
         .dua-grid-btn:hover {
             background-color: #165F52;
             color: white;
             transform: translateY(-2px);
             box-shadow: 0 4px 8px rgba(22, 95, 82, 0.15);
         }
-
-        .dua-grid-btn:active {
-            transform: scale(0.98);
-        }
+        .dua-grid-btn:active { transform: scale(0.98); }
 
         /* Modal Specifics for Dua */
         .dua-modal-arabic {
@@ -302,7 +287,6 @@
             line-height: 1.8;
             font-weight: 700;
         }
-
         .dua-box-label {
             font-size: 10px;
             color: #94A3B8;
@@ -311,7 +295,6 @@
             letter-spacing: 1px;
             margin-bottom: 5px;
         }
-
         .dua-transliteration-box {
             background-color: #F8FAFC;
             border: 1px solid #E2E8F0;
@@ -323,9 +306,8 @@
             color: #475569;
             line-height: 1.5;
         }
-
         .dua-translation-box {
-            background-color: #F0FDF4; /* Very light green */
+            background-color: #F0FDF4; 
             border: 1px solid #DCFCE7;
             border-radius: 12px;
             padding: 12px;
@@ -385,22 +367,22 @@
         .credits-text { font-size: 13px; color: #9CA3AF; margin-bottom: 4px; }
         .credits-link { font-size: 11px; color: #165F52; font-weight: 600; text-decoration: none; display: block; }
 
-/* Add a dimming effect when location menu is open */
-.header-info::after {
-    content: "";
-    position: fixed;
-    top: 0; left: 0;
-    width: 100vw; height: 100vh;
-    background: rgba(0,0,0,0.5);
-    z-index: 100;
-    display: none;
-    pointer-events: none;
-}
+        /* Add a dimming effect when location menu is open */
+        .header-info::after {
+            content: "";
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            background: rgba(0,0,0,0.5);
+            z-index: 100;
+            display: none;
+            pointer-events: none;
+        }
 
-/* Show the dimming effect only when menu has the 'show' class */
-.header-info:has(.location-dropdown.show)::after {
-    display: block;
-}
+        /* Show the dimming effect only when menu has the 'show' class */
+        .header-info:has(.location-dropdown.show)::after {
+            display: block;
+        }
 
     </style>
 </head>
@@ -458,8 +440,6 @@
 C.D. Barfiwala Road, Andheri (W), Mumbai 400053</div>
                 </div>
             </a>
-
-            
         </div>
     </div>
 
@@ -480,7 +460,7 @@ C.D. Barfiwala Road, Andheri (W), Mumbai 400053</div>
 
                 <div id="location-menu" class="location-dropdown">
                     <div class="location-option" data-city="Mumbai" onclick="changeLocation('Mumbai', 'Mumbai, India')">Mumbai</div>
-                    <div class="location-option" data-city="Delhi" onclick="changeLocation('Delhi', 'Delhi, India')">Delhi</div>
+                    <div class="location-option" data-city="Ratangarh" onclick="changeLocation('Ratangarh', 'Ratangarh, Rajasthan')">Ratangarh</div>
                     <div class="location-option" data-city="Dubai" onclick="changeLocation('Dubai', 'Dubai, UAE')">Dubai</div>
                     <div class="location-option" data-city="Toronto" onclick="changeLocation('Toronto', 'Toronto, Canada')">Toronto</div>
                 </div>
@@ -493,7 +473,8 @@ C.D. Barfiwala Road, Andheri (W), Mumbai 400053</div>
         <section class="timer-section">
             <div class="timer-card">
                 <div class="timer-heading" id="countdown-title">Ramadan begins in</div>
-                <div class="timer-grid">
+                
+                <div class="timer-grid" id="countdown-grid">
                     <div class="time-unit"><span class="time-val" id="cd-days">00</span><span class="time-label">Days</span></div>
                     <div class="time-unit"><span class="time-val" id="cd-hours">00</span><span class="time-label">Hours</span></div>
                     <div class="time-unit"><span class="time-val" id="cd-minutes">00</span><span class="time-label">Mins</span></div>
@@ -631,38 +612,37 @@ C.D. Barfiwala Road, Andheri (W), Mumbai 400053</div>
                 { roza: 30, date: "Mar 20", day: "Fri", sehri: "05:31 AM", iftar: "06:49 PM" }
             ],
             
-            "Delhi": [ 
-                { roza: 1, date: "Feb 19", day: "Thu", sehri: "05:37 AM", iftar: "06:16 PM" },
-                { roza: 2, date: "Feb 20", day: "Fri", sehri: "05:36 AM", iftar: "06:16 PM" },
-                { roza: 3, date: "Feb 21", day: "Sat", sehri: "05:35 AM", iftar: "06:17 PM" },
-                { roza: 4, date: "Feb 22", day: "Sun", sehri: "05:34 AM", iftar: "06:17 PM" },
-                { roza: 5, date: "Feb 23", day: "Mon", sehri: "05:33 AM", iftar: "06:18 PM" },
-                { roza: 6, date: "Feb 24", day: "Tue", sehri: "05:32 AM", iftar: "06:19 PM" },
-                { roza: 7, date: "Feb 25", day: "Wed", sehri: "05:31 AM", iftar: "06:19 PM" },
-                { roza: 8, date: "Feb 26", day: "Thu", sehri: "05:30 AM", iftar: "06:20 PM" },
-                { roza: 9, date: "Feb 27", day: "Fri", sehri: "05:29 AM", iftar: "06:21 PM" },
-                { roza: 10, date: "Feb 28", day: "Sat", sehri: "05:28 AM", iftar: "06:21 PM" },
-                { roza: 11, date: "Mar 01", day: "Sun", sehri: "05:27 AM", iftar: "06:22 PM" },
-                { roza: 12, date: "Mar 02", day: "Mon", sehri: "05:26 AM", iftar: "06:23 PM" },
-                { roza: 13, date: "Mar 03", day: "Tue", sehri: "05:25 AM", iftar: "06:23 PM" },
-                { roza: 14, date: "Mar 04", day: "Wed", sehri: "05:24 AM", iftar: "06:24 PM" },
-                { roza: 15, date: "Mar 05", day: "Thu", sehri: "05:23 AM", iftar: "06:25 PM" },
-                { roza: 16, date: "Mar 06", day: "Fri", sehri: "05:22 AM", iftar: "06:25 PM" },
-                { roza: 17, date: "Mar 07", day: "Sat", sehri: "05:21 AM", iftar: "06:26 PM" },
-                { roza: 18, date: "Mar 08", day: "Sun", sehri: "05:20 AM", iftar: "06:27 PM" },
-                { roza: 19, date: "Mar 09", day: "Mon", sehri: "05:19 AM", iftar: "06:27 PM" },
-                { roza: 20, date: "Mar 10", day: "Tue", sehri: "05:18 AM", iftar: "06:28 PM" },
-                { roza: 21, date: "Mar 11", day: "Wed", sehri: "05:17 AM", iftar: "06:28 PM" },
-                { roza: 22, date: "Mar 12", day: "Thu", sehri: "05:16 AM", iftar: "06:29 PM" },
-                { roza: 23, date: "Mar 13", day: "Fri", sehri: "05:15 AM", iftar: "06:29 PM" },
-                { roza: 24, date: "Mar 14", day: "Sat", sehri: "05:14 AM", iftar: "06:30 PM" },
-                { roza: 25, date: "Mar 15", day: "Sun", sehri: "05:13 AM", iftar: "06:31 PM" },
-                { roza: 26, date: "Mar 16", day: "Mon", sehri: "05:12 AM", iftar: "06:31 PM" },
-                { roza: 27, date: "Mar 17", day: "Tue", sehri: "05:11 AM", iftar: "06:32 PM" },
-                { roza: 28, date: "Mar 18", day: "Wed", sehri: "05:10 AM", iftar: "06:32 PM" },
-                { roza: 29, date: "Mar 19", day: "Thu", sehri: "05:08 AM", iftar: "06:33 PM" },
-                { roza: 30, date: "Mar 20", day: "Fri", sehri: "05:06 AM", iftar: "06:34 PM" }
-                 
+            "Ratangarh": [ 
+                { roza: 1, date: "Feb 19", day: "Thu", sehri: "05:47 AM", iftar: "06:26 PM" },
+                { roza: 2, date: "Feb 20", day: "Fri", sehri: "05:47 AM", iftar: "06:26 PM" },
+                { roza: 3, date: "Feb 21", day: "Sat", sehri: "05:46 AM", iftar: "06:27 PM" },
+                { roza: 4, date: "Feb 22", day: "Sun", sehri: "05:45 AM", iftar: "06:28 PM" },
+                { roza: 5, date: "Feb 23", day: "Mon", sehri: "05:44 AM", iftar: "06:28 PM" },
+                { roza: 6, date: "Feb 24", day: "Tue", sehri: "05:43 AM", iftar: "06:29 PM" },
+                { roza: 7, date: "Feb 25", day: "Wed", sehri: "05:42 AM", iftar: "06:30 PM" },
+                { roza: 8, date: "Feb 26", day: "Thu", sehri: "05:41 AM", iftar: "06:30 PM" },
+                { roza: 9, date: "Feb 27", day: "Fri", sehri: "05:40 AM", iftar: "06:31 PM" },
+                { roza: 10, date: "Feb 28", day: "Sat", sehri: "05:39 AM", iftar: "06:32 PM" },
+                { roza: 11, date: "Mar 01", day: "Sun", sehri: "05:38 AM", iftar: "06:32 PM" },
+                { roza: 12, date: "Mar 02", day: "Mon", sehri: "05:37 AM", iftar: "06:33 PM" },
+                { roza: 13, date: "Mar 03", day: "Tue", sehri: "05:36 AM", iftar: "06:33 PM" },
+                { roza: 14, date: "Mar 04", day: "Wed", sehri: "05:35 AM", iftar: "06:34 PM" },
+                { roza: 15, date: "Mar 05", day: "Thu", sehri: "05:34 AM", iftar: "06:35 PM" },
+                { roza: 16, date: "Mar 06", day: "Fri", sehri: "05:33 AM", iftar: "06:35 PM" },
+                { roza: 17, date: "Mar 07", day: "Sat", sehri: "05:32 AM", iftar: "06:36 PM" },
+                { roza: 18, date: "Mar 08", day: "Sun", sehri: "05:31 AM", iftar: "06:36 PM" },
+                { roza: 19, date: "Mar 09", day: "Mon", sehri: "05:30 AM", iftar: "06:37 PM" },
+                { roza: 20, date: "Mar 10", day: "Tue", sehri: "05:29 AM", iftar: "06:38 PM" },
+                { roza: 21, date: "Mar 11", day: "Wed", sehri: "05:28 AM", iftar: "06:38 PM" },
+                { roza: 22, date: "Mar 12", day: "Thu", sehri: "05:27 AM", iftar: "06:39 PM" },
+                { roza: 23, date: "Mar 13", day: "Fri", sehri: "05:26 AM", iftar: "06:39 PM" },
+                { roza: 24, date: "Mar 14", day: "Sat", sehri: "05:24 AM", iftar: "06:40 PM" },
+                { roza: 25, date: "Mar 15", day: "Sun", sehri: "05:23 AM", iftar: "06:40 PM" },
+                { roza: 26, date: "Mar 16", day: "Mon", sehri: "05:22 AM", iftar: "06:41 PM" },
+                { roza: 27, date: "Mar 17", day: "Tue", sehri: "05:21 AM", iftar: "06:42 PM" },
+                { roza: 28, date: "Mar 18", day: "Wed", sehri: "05:20 AM", iftar: "06:42 PM" },
+                { roza: 29, date: "Mar 19", day: "Thu", sehri: "05:19 AM", iftar: "06:43 PM" },
+                { roza: 30, date: "Mar 20", day: "Fri", sehri: "05:17 AM", iftar: "06:43 PM" }
             ],
             "Dubai": [
                 { roza: 1, date: "Feb 18", day: "Wed", sehri: "05:34 AM", iftar: "06:15 PM" },
@@ -695,7 +675,6 @@ C.D. Barfiwala Road, Andheri (W), Mumbai 400053</div>
                 { roza: 28, date: "Mar 17", day: "Tue", sehri: "05:10 AM", iftar: "06:29 PM" },
                 { roza: 29, date: "Mar 18", day: "Wed", sehri: "05:09 AM", iftar: "06:29 PM" },
                 { roza: 30, date: "Mar 19", day: "Thu", sehri: "05:08 AM", iftar: "06:30 PM" } 
-                 
             ],
             "Toronto": [
                 { roza: 1, date: "Feb 18", day: "Wed", sehri: "05:35 AM", iftar: "05:53 PM" },
@@ -728,7 +707,6 @@ C.D. Barfiwala Road, Andheri (W), Mumbai 400053</div>
                 { roza: 28, date: "Mar 17", day: "Tue", sehri: "05:51 AM", iftar: "07:26 PM" },
                 { roza: 29, date: "Mar 18", day: "Wed", sehri: "05:50 AM", iftar: "07:27 PM" },
                 { roza: 30, date: "Mar 19", day: "Thu", sehri: "05:48 AM", iftar: "07:28 PM" }
-                 
             ]
         };
 
@@ -739,63 +717,50 @@ C.D. Barfiwala Road, Andheri (W), Mumbai 400053</div>
         ];
 
         const duaList = [
-    { arabic: "رَّبِّ اغْفِرْ وَارْحَمْ وَأَنتَ خَيْرُ الرَّاحِمِينَ", translation: "O My Lord, forgive and have mercy, and You are the Best of those who show mercy.", ref: "Qur'an (23:118)" },
-    { arabic: "رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ", translation: "Our Lord! Give us in this world that which is good and in the Hereafter that which is good, and protect us from the punishment of the Fire.", ref: "Qur'an (2:201)" },
+            { arabic: "رَّبِّ اغْفِرْ وَارْحَمْ وَأَنتَ خَيْرُ الرَّاحِمِينَ", translation: "O My Lord, forgive and have mercy, and You are the Best of those who show mercy.", ref: "Qur'an (23:118)" },
+            { arabic: "رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ", translation: "Our Lord! Give us in this world that which is good and in the Hereafter that which is good, and protect us from the punishment of the Fire.", ref: "Qur'an (2:201)" },
+            { arabic: "اللَّهُمَّ إِنَّكَ عَفُوٌّ تُحِبُّ الْعَفْوَ فَاعْفُ عَنِّي", translation: "O Allah, You are Forgiving and love forgiveness, so forgive me.", ref: "Tirmidhi" },
+            { arabic: "اللَّهُمَّ يَا مُقَلِّبَ الْقُلُوبِ ثَبِّتْ قَلْبِي عَلَى دِينِكَ", translation: "O Turner of the hearts, keep my heart firm upon Your religion.", ref: "Tirmidhi" },
+            { arabic: "ذَهَبَ الظَّمَأُ وَابْتَلَّتِ الْعُرُوقُ وَثَبَتَ الأَجْرُ إِنْ شَاءَ اللَّهُ", translation: "The thirst has gone, the veins are moistened, and the reward is confirmed, if Allah wills.", ref: "Abu Dawood" },
+            { arabic: "اللَّهُمَّ إِنِّي لَكَ صُمْتُ وَبِكَ آمَنْتُ وَعَلَيْكَ تَوَكَّلْتُ وَعَلَى رِزْقِكَ أَفْطَرْتُ", translation: "O Allah, I fasted for You, believed in You, relied upon You, and broke my fast with Your provision.", ref: "Abu Dawood" },
+            { arabic: "اللَّهُمَّ تَقَبَّلْ مِنَّا الصِّيَامَ وَالْقِيَامَ", translation: "O Allah, accept from us our fasting and prayers.", ref: "Common Dua" },
+            { arabic: "اللَّهُمَّ أَجِرْنَا مِنَ النَّارِ", translation: "O Allah, protect us from the Fire.", ref: "Common Dua" },
+            { arabic: "رَبِّ اغْفِرْ لِي وَلِوَالِدَيَّ", translation: "My Lord, forgive me and my parents.", ref: "Qur'an" },
+            { arabic: "رَبِّ ارْحَمْهُمَا كَمَا رَبَّيَانِي صَغِيرًا", translation: "My Lord, have mercy upon them as they brought me up when I was small.", ref: "Qur'an (17:24)" },
+            { arabic: "اللَّهُمَّ أَعِنِّي عَلَى ذِكْرِكَ وَشُكْرِكَ وَحُسْنِ عِبَادَتِكَ", translation: "O Allah, help me to remember You, thank You, and worship You in the best manner.", ref: "Abu Dawood" },
+            { arabic: "نَوَيْتُ سُنَّةَ الْاِعْتِكَافِ مَا دُمْتُ فِي هٰذِهِ الْمَسْجِدِ", translation: "I intend to observe the Sunnah of I‘tikaf for as long as I remain in this mosque.", ref: "I‘tikaf Niyyah" },
+            { arabic: "سُبْحَانَ ذِي الْمُلْكِ وَالْمَلَكُوتِ سُبْحَانَ ذِي الْعِزَّةِ وَالْعَظَمَةِ وَالْهَيْبَةِ وَالْقُدْرَةِ وَالْكِبْرِيَاءِ وَالْجَبَرُوتِ", translation: "Glory be to the Owner of sovereignty and dominion. Glory be to the Possessor of honor, greatness, awe, power, majesty, and might.", ref: "Taraweeh Tasbeeh" },
+            { arabic: "سُبْحَانَ الْمَلِكِ الْحَيِّ الَّذِي لَا يَنَامُ وَلَا يَمُوتُ سُبُّوحٌ قُدُّوسٌ رَبُّنَا وَرَبُّ الْمَلَائِكَةِ وَالرُّوحِ", translation: "Glory be to the Ever-Living King who neither sleeps nor dies. Perfectly Pure and Holy is our Lord.", ref: "Taraweeh Tasbeeh" },
+            { arabic: "اللَّهُمَّ أَجِرْنَا مِنَ النَّارِ يَا مُجِيرُ يَا مُجِيرُ يَا مُجِيرُ بِرَحْمَتِكَ يَا أَرْحَمَ الرَّاحِمِينَ", translation: "O Allah, protect us from the Fire. By Your mercy, O Most Merciful of those who show mercy.", ref: "Taraweeh Tasbeeh" }
+        ];
 
-    { arabic: "اللَّهُمَّ إِنَّكَ عَفُوٌّ تُحِبُّ الْعَفْوَ فَاعْفُ عَنِّي", translation: "O Allah, You are Forgiving and love forgiveness, so forgive me.", ref: "Tirmidhi" },
-
-    { arabic: "اللَّهُمَّ يَا مُقَلِّبَ الْقُلُوبِ ثَبِّتْ قَلْبِي عَلَى دِينِكَ", translation: "O Turner of the hearts, keep my heart firm upon Your religion.", ref: "Tirmidhi" },
-
-    { arabic: "ذَهَبَ الظَّمَأُ وَابْتَلَّتِ الْعُرُوقُ وَثَبَتَ الأَجْرُ إِنْ شَاءَ اللَّهُ", translation: "The thirst has gone, the veins are moistened, and the reward is confirmed, if Allah wills.", ref: "Abu Dawood" },
-
-    { arabic: "اللَّهُمَّ إِنِّي لَكَ صُمْتُ وَبِكَ آمَنْتُ وَعَلَيْكَ تَوَكَّلْتُ وَعَلَى رِزْقِكَ أَفْطَرْتُ", translation: "O Allah, I fasted for You, believed in You, relied upon You, and broke my fast with Your provision.", ref: "Abu Dawood" },
-
-    { arabic: "اللَّهُمَّ تَقَبَّلْ مِنَّا الصِّيَامَ وَالْقِيَامَ", translation: "O Allah, accept from us our fasting and prayers.", ref: "Common Dua" },
-
-    { arabic: "اللَّهُمَّ أَجِرْنَا مِنَ النَّارِ", translation: "O Allah, protect us from the Fire.", ref: "Common Dua" },
-
-    { arabic: "رَبِّ اغْفِرْ لِي وَلِوَالِدَيَّ", translation: "My Lord, forgive me and my parents.", ref: "Qur'an" },
-
-    { arabic: "رَبِّ ارْحَمْهُمَا كَمَا رَبَّيَانِي صَغِيرًا", translation: "My Lord, have mercy upon them as they brought me up when I was small.", ref: "Qur'an (17:24)" },
-
-    { arabic: "اللَّهُمَّ أَعِنِّي عَلَى ذِكْرِكَ وَشُكْرِكَ وَحُسْنِ عِبَادَتِكَ", translation: "O Allah, help me to remember You, thank You, and worship You in the best manner.", ref: "Abu Dawood" },
-
-    { arabic: "نَوَيْتُ سُنَّةَ الْاِعْتِكَافِ مَا دُمْتُ فِي هٰذِهِ الْمَسْجِدِ", translation: "I intend to observe the Sunnah of I‘tikaf for as long as I remain in this mosque.", ref: "I‘tikaf Niyyah" },
-
-    { arabic: "سُبْحَانَ ذِي الْمُلْكِ وَالْمَلَكُوتِ سُبْحَانَ ذِي الْعِزَّةِ وَالْعَظَمَةِ وَالْهَيْبَةِ وَالْقُدْرَةِ وَالْكِبْرِيَاءِ وَالْجَبَرُوتِ", translation: "Glory be to the Owner of sovereignty and dominion. Glory be to the Possessor of honor, greatness, awe, power, majesty, and might.", ref: "Taraweeh Tasbeeh" },
-
-    { arabic: "سُبْحَانَ الْمَلِكِ الْحَيِّ الَّذِي لَا يَنَامُ وَلَا يَمُوتُ سُبُّوحٌ قُدُّوسٌ رَبُّنَا وَرَبُّ الْمَلَائِكَةِ وَالرُّوحِ", translation: "Glory be to the Ever-Living King who neither sleeps nor dies. Perfectly Pure and Holy is our Lord.", ref: "Taraweeh Tasbeeh" },
-
-    { arabic: "اللَّهُمَّ أَجِرْنَا مِنَ النَّارِ يَا مُجِيرُ يَا مُجِيرُ يَا مُجِيرُ بِرَحْمَتِكَ يَا أَرْحَمَ الرَّاحِمِينَ", translation: "O Allah, protect us from the Fire. By Your mercy, O Most Merciful of those who show mercy.", ref: "Taraweeh Tasbeeh" }
-];
+        // --- TIMEZONE CONFIG ---
+        const cityTimezones = {
+            "Mumbai": "Asia/Kolkata",
+            "Ratangarh": "Asia/Kolkata",
+            "Dubai": "Asia/Dubai",
+            "Toronto": "America/Toronto"
+        };
 
         let isFullView = false; let qIdx = 0; let dIdx = 0; let lastDateKey = "";
         
-        // --- NEW STATE FOR LOCATION ---
-        // Get stored city or default to gorakhpur
         let currentCityKey = localStorage.getItem('selectedCityKey') || 'Mumbai';
-        let currentCityDisplay = localStorage.getItem('selectedCityDisplay') || 'Mumbai, Maharashtra';
+        let currentCityDisplay = localStorage.getItem('selectedCityDisplay') || 'Mumbai, India';
 
-        // MODAL FUNCTIONS
         function openAbout(el) { highlightNav(el); document.getElementById('aboutModal').style.display = 'flex'; }
         function openContact(el) { highlightNav(el); document.getElementById('contactModal').style.display = 'flex'; }
         function closeAllModals() { 
-    document.getElementById('aboutModal').style.display = 'none'; 
-    document.getElementById('contactModal').style.display = 'none'; 
-    // Add this new line:
-    document.getElementById('moreDuaModal').style.display = 'none';
-}
+            document.getElementById('aboutModal').style.display = 'none'; 
+            document.getElementById('contactModal').style.display = 'none'; 
+            document.getElementById('moreDuaModal').style.display = 'none';
+        }
         function highlightNav(el) { document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active')); el.classList.add('active'); }
-
         function navigate(id, el) { highlightNav(el); const target = document.getElementById(id); if (target) target.scrollIntoView({ behavior: 'smooth' }); }
 
-        // --- NEW LOCATION FUNCTIONS ---
         function toggleLocationMenu(event) {
-            if(event) event.stopPropagation(); // Prevent triggering document click
+            if(event) event.stopPropagation();
             const menu = document.getElementById('location-menu');
             menu.classList.toggle('show');
-            
-            // Highlight current selection
             document.querySelectorAll('.location-option').forEach(opt => {
                 opt.classList.remove('active-city');
                 if(opt.getAttribute('data-city') === currentCityKey) {
@@ -805,29 +770,22 @@ C.D. Barfiwala Road, Andheri (W), Mumbai 400053</div>
         }
 
         function changeLocation(cityKey, displayName) {
-    // Update state
-    currentCityKey = cityKey;
-    currentCityDisplay = displayName;
-    
-    // Save to local storage
-    localStorage.setItem('selectedCityKey', currentCityKey);
-    localStorage.setItem('selectedCityDisplay', currentCityDisplay);
+            currentCityKey = cityKey;
+            currentCityDisplay = displayName;
+            
+            localStorage.setItem('selectedCityKey', currentCityKey);
+            localStorage.setItem('selectedCityDisplay', currentCityDisplay);
 
-    // Update UI Text
-    document.getElementById('current-location-text').innerText = currentCityDisplay;
-    document.getElementById('footer-location-text').innerText = currentCityDisplay;
+            document.getElementById('current-location-text').innerText = currentCityDisplay;
+            document.getElementById('footer-location-text').innerText = currentCityDisplay;
 
-    // Hide menu with a slight delay for better feedback
-    const menu = document.getElementById('location-menu');
-    menu.style.boxShadow = ""; // Reset highlight
-    setTimeout(() => {
-        menu.classList.remove('show');
-    }, 200);
+            const menu = document.getElementById('location-menu');
+            menu.style.boxShadow = ""; 
+            setTimeout(() => { menu.classList.remove('show'); }, 200);
 
-    renderTimetable();
-}
+            renderTimetable();
+        }
 
-        // Close dropdown if clicked outside
         document.addEventListener('click', function(event) {
             const menu = document.getElementById('location-menu');
             const pill = document.querySelector('.location-pill');
@@ -836,15 +794,26 @@ C.D. Barfiwala Road, Andheri (W), Mumbai 400053</div>
             }
         });
 
+        // --- HELPER: GET TIME IN CITY'S TIMEZONE ---
+        function getCityDate(cityKey) {
+            const tz = cityTimezones[cityKey] || "Asia/Kolkata";
+            const now = new Date();
+            // Create date object relative to the city timezone
+            const cityTimeStr = now.toLocaleString("en-US", { timeZone: tz });
+            return new Date(cityTimeStr);
+        }
 
-        function getTodayKey() { const d = new Date(); return d.toLocaleString('default', { month: 'short' }) + " " + String(d.getDate()).padStart(2, '0'); }
+        function getTodayKey() { 
+            // Use city-specific date to determine 'Today'
+            const d = getCityDate(currentCityKey);
+            return d.toLocaleString('default', { month: 'short' }) + " " + String(d.getDate()).padStart(2, '0'); 
+        }
 
         function renderTimetable() {
             const container = document.getElementById('timetable-list');
-            const todayStr = getTodayKey(); lastDateKey = todayStr;
+            const todayStr = getTodayKey(); 
+            lastDateKey = todayStr;
             
-            // --- UPDATED to use currentCityKey ---
-            // Get data for selected city, fallback to empty array if missing
             const currentData = timetableDatabase[currentCityKey] || []; 
 
             if(currentData.length === 0 && currentCityKey !== 'Mumbai') {
@@ -867,7 +836,7 @@ C.D. Barfiwala Road, Andheri (W), Mumbai 400053</div>
         }
 
         function parseTimeStr(str, baseDate) {
-            if(!str) return baseDate; // Handle missing data
+            if(!str) return baseDate; 
             const [time, modifier] = str.split(' ');
             let [h, m] = time.split(':');
             if (h === '12') h = '00';
@@ -878,22 +847,20 @@ C.D. Barfiwala Road, Andheri (W), Mumbai 400053</div>
         }
 
         function startCountdown() {
-            // We move the definition inside the interval so it updates if the city changes
             setInterval(() => {
-                const now = new Date();
+                // Use the City-Specific "Now" Time (Solves the timezone issue)
+                const now = getCityDate(currentCityKey); 
+
                 let target; 
                 let label;
                 
-                // 1. Get data for the currently selected city
                 const currentData = timetableDatabase[currentCityKey] || [];
-
-                // 2. Determine Ramadan Start Date dynamically from the first entry
                 let ramadanStart;
+                
+                // Determine Start Date based on data
                 if (currentData.length > 0) {
-                    // Takes "Feb 19" and adds ", 2026 00:00:00"
                     ramadanStart = new Date(currentData[0].date + ", 2026 00:00:00");
                 } else {
-                    // Fallback just in case data is missing
                     ramadanStart = new Date("February 19, 2026 00:00:00");
                 }
 
@@ -901,7 +868,6 @@ C.D. Barfiwala Road, Andheri (W), Mumbai 400053</div>
                     target = ramadanStart; 
                     label = "Ramadan begins in";
                 } else {
-                    // If Ramadan has started, find today's specific Sehri/Iftar
                     const todayData = currentData.find(d => d.date.toLowerCase() === getTodayKey().toLowerCase());
                     
                     if (todayData) {
@@ -919,39 +885,34 @@ C.D. Barfiwala Road, Andheri (W), Mumbai 400053</div>
                             target = null; 
                         }
                     } else { 
-                        // If today is not in the list, assume Ramadan ended or data missing
                         label = "Ramadan Ended"; 
                         target = null; 
                     }
                 }
 
-                // Update the UI
                 document.getElementById('countdown-title').innerText = label;
                 
                 if (target) {
                     const diff = target - now;
-                    // Handle case where diff is negative (just in case)
                     if (diff > 0) {
                         document.getElementById('cd-days').innerText = Math.floor(diff / 86400000).toString().padStart(2, '0');
                         document.getElementById('cd-hours').innerText = Math.floor((diff / 3600000) % 24).toString().padStart(2, '0');
                         document.getElementById('cd-minutes').innerText = Math.floor((diff / 60000) % 60).toString().padStart(2, '0');
                         document.getElementById('cd-seconds').innerText = Math.floor((diff / 1000) % 60).toString().padStart(2, '0');
                     } else {
-                         // Zero out if slight overlap
                         document.getElementById('cd-days').innerText = "00";
                         document.getElementById('cd-hours').innerText = "00";
                         document.getElementById('cd-minutes').innerText = "00";
                         document.getElementById('cd-seconds').innerText = "00";
                     }
                 } else {
-                    // Clear timer if no target
                     document.getElementById('cd-days').innerText = "00";
                     document.getElementById('cd-hours').innerText = "00";
                     document.getElementById('cd-minutes').innerText = "00";
                     document.getElementById('cd-seconds').innerText = "00";
                 }
 
-                // Refresh timetable list if the day physically changes while app is open
+                // Refresh timetable list if the day physically changes
                 if (getTodayKey() !== lastDateKey) renderTimetable(); 
             }, 1000);
         }
@@ -980,23 +941,22 @@ C.D. Barfiwala Road, Andheri (W), Mumbai 400053</div>
         }
 
         function toggleView() { isFullView = !isFullView; renderTimetable(); }
-// --- Share Logic ---
-function shareApp() {
-    const shareData = {
-        title: 'Ramadan Timetable 2026',
-        text: '🌙 *Ramadan Timetable 2026 - Mumbai*\n\nView the complete digital timetable with daily Sehri & Iftar timings, Duas, and more.\n\nClick here to view:',
-        url: window.location.href
-    };
-    if (navigator.share) {
-        navigator.share(shareData).catch((err) => console.log('Error sharing:', err));
-    } else {
-        navigator.clipboard.writeText(window.location.href)
-            .then(() => alert('Link copied to clipboard!'))
-            .catch(err => alert('Could not copy link.'));
-    }
-}
 
-        // --- DATA: MORE DUAS STORE ---
+        function shareApp() {
+            const shareData = {
+                title: 'Ramadan Timetable 2026',
+                text: '🌙 *Ramadan Timetable 2026 - Mumbai*\n\nView the complete digital timetable with daily Sehri & Iftar timings, Duas, and more.\n\nClick here to view:',
+                url: window.location.href
+            };
+            if (navigator.share) {
+                navigator.share(shareData).catch((err) => console.log('Error sharing:', err));
+            } else {
+                navigator.clipboard.writeText(window.location.href)
+                    .then(() => alert('Link copied to clipboard!'))
+                    .catch(err => alert('Could not copy link.'));
+            }
+        }
+
         const duaDataStore = {
             "Taraweeh": {
                 arabic: "سُبْحَانَ ذِي الْمُلْكِ وَالْمَلَكُوتِ، سُبْحَانَ ذِي الْعِزَّةِ وَالْعَظَمَةِ وَالْهَيْبَةِ وَالْقُدْرَةِ وَالْكِبْرِيَاءِ وَالْجَبَرُوتِ، سُبْحَانَ الْمَلِكِ الْحَيِّ الَّذِي لَا يَنَامُ وَلَا يَمُوتُ، سُبُّوحٌ قُدُّوسٌ رَبُّنَا وَرَبُّ الْمَلَائِكَةِ وَالرُّوحِ، اللَّهُمَّ أَجِرْنَا مِنَ النَّارِ يَا مُجِيرُ يَا مُجِيرُ يَا مُجِيرُ",
@@ -1043,34 +1003,29 @@ function shareApp() {
         }
 
         document.addEventListener('DOMContentLoaded', () => { 
-    // 1. Get stored data
-    const savedCity = localStorage.getItem('selectedCityKey');
-    
-    // 2. Initial render with stored or default data
-    if (savedCity) {
-        currentCityKey = savedCity;
-        currentCityDisplay = localStorage.getItem('selectedCityDisplay');
-        document.getElementById('current-location-text').innerText = currentCityDisplay;
-        document.getElementById('footer-location-text').innerText = currentCityDisplay;
-    }
+            const savedCity = localStorage.getItem('selectedCityKey');
+            
+            if (savedCity) {
+                currentCityKey = savedCity;
+                currentCityDisplay = localStorage.getItem('selectedCityDisplay');
+                document.getElementById('current-location-text').innerText = currentCityDisplay;
+                document.getElementById('footer-location-text').innerText = currentCityDisplay;
+            }
 
-    renderTimetable(); 
-    startCountdown(); 
-    moveHero(0); 
-    moveDua(0);
-    
-    // 3. FIRST-TIME TRIGGER: If no city is saved, open the menu automatically
-    if (!savedCity) {
-        setTimeout(() => {
-            toggleLocationMenu();
-            // Optional: Add a subtle pulse or glow to the menu to grab attention
-            document.getElementById('location-menu').style.boxShadow = "0 0 20px #165F52";
-        }, 800); // Small delay for better visual effect
-    }
+            renderTimetable(); 
+            startCountdown(); 
+            moveHero(0); 
+            moveDua(0);
+            
+            if (!savedCity) {
+                setTimeout(() => {
+                    toggleLocationMenu();
+                    document.getElementById('location-menu').style.boxShadow = "0 0 20px #165F52";
+                }, 800);
+            }
 
-    setInterval(() => moveHero(1), 8000);
-});
+            setInterval(() => moveHero(1), 8000);
+        });
     </script>
 </body>
-
 </html>
