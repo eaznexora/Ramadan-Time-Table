@@ -1,3 +1,12 @@
+// --- FORCE CACHE RELOAD SCRIPT ---
+const currentVersion = '2.0'; // Jab bhi update karo, is number ko badha dena
+if (localStorage.getItem('appVersion') !== currentVersion) {
+    localStorage.setItem('appVersion', currentVersion);
+    // Page ko server se fresh reload karega
+    window.location.reload(true);
+}
+// ---------------------------------
+
 // --- CONFIGURATION ---
 const DEMO_MODE = false; 
 
