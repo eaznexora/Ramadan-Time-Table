@@ -1,0 +1,1 @@
+self.__SSG_MANIFEST=new Set(["\u002Fdish\u002F[id]","\u002Fmeals\u002F[meal]"]);self.__SSG_MANIFEST_CB&&self.__SSG_MANIFEST_CB()
